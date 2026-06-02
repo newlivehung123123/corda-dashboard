@@ -1,0 +1,31 @@
+name: Deploy to Hugging Face Spaces
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Push to Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          cd dist
+          git init
+          git config user.email "deploy@corda.demo"
+          git config user.name "CORDA Deploy"
+          git add .
+          git commit -m "Deploy from GitHub"
+          git push --force https://newlivehung:$HF_TOKEN@huggingface.co/spaces/newlivehung/corda-democracy main
