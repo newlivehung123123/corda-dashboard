@@ -23,7 +23,7 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           cd dist
-          git init
+          git init -b main
           git config user.email "deploy@corda.demo"
           git config user.name "CORDA Deploy"
           git add .
