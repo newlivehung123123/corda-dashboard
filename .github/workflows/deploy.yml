@@ -23,6 +23,16 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           cd dist
+          cat > README.md << 'EOF'
+          ---
+          title: CORDA Democratic AI-Readiness Index
+          emoji: 🗳️
+          colorFrom: blue
+          colorTo: indigo
+          sdk: static
+          pinned: false
+          ---
+          EOF
           git init -b main
           git config user.email "deploy@corda.demo"
           git config user.name "CORDA Deploy"
