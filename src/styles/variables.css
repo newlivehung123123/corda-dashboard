@@ -1,0 +1,40 @@
+:root {
+  /* Background */
+  --colour-bg:          #F5F0E8;
+  --colour-bg-card:     #EFEAD9;
+  --colour-bg-overlay:  #E8E1CE;
+
+  /* Text */
+  --colour-text:        #1A1A1A;
+  --colour-text-muted:  #5A5448;
+  --colour-text-light:  #8C8375;
+
+  /* Brand / accent */
+  --colour-accent:      #2B4C7E;
+  --colour-accent-2:    #8B6914;
+
+  /* Driver colours */
+  --colour-d1:          #4E79A7;
+  --colour-d2:          #F28E2B;
+  --colour-d3:          #E15759;
+  --colour-d4:          #76B7B2;
+  --colour-d5:          #59A14F;
+  --colour-composite:   #2B4C7E;
+
+  /* Regime type colours */
+  --colour-liberal:     #2B4C7E;
+  --colour-electoral:   #76B7B2;
+  --colour-hybrid:      #F28E2B;
+  --colour-authoritarian: #E15759;
+
+  /* UI */
+  --colour-border:        rgba(139, 110, 20, 0.15);
+  --colour-border-strong: rgba(139, 110, 20, 0.30);
+  --colour-shadow:        rgba(43, 76, 126, 0.04);
+
+  /* Region colours */
+  --colour-region-europe: #4E79A7;
+  --colour-region-asia: #59A14F;
+  --colour-region-americas: #F28E2B;
+  --colour-region-mea: #E15759;
+}
