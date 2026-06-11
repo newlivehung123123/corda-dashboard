@@ -5,7 +5,10 @@ import FilterBar from './components/FilterBar.jsx';
 import RankingsView from './components/views/RankingsView.jsx';
 import ScatterView from './components/views/ScatterView.jsx';
 import MapView from './components/views/MapView.jsx';
-import Methodology from './components/Methodology.jsx';
+import MissionVision from './components/MissionVision.jsx';
+import MethodologyImplementation from './components/MethodologyImplementation.jsx';
+import RegimeClassification from './components/RegimeClassification.jsx';
+import AnalyticalMethods from './components/AnalyticalMethods.jsx';
 import Footer from './components/Footer.jsx';
 
 export default function App() {
@@ -71,7 +74,10 @@ export default function App() {
         )}
       </main>
 
-      <Methodology />
+      <MissionVision />
+      <MethodologyImplementation />
+      <RegimeClassification />
+      <AnalyticalMethods />
       <Footer />
     </div>
   );
