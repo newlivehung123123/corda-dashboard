@@ -4,7 +4,7 @@ const navLinks = [
   { label: 'Rankings',    href: '#rankings' },
   { label: 'Scatter',     href: '#scatter' },
   { label: 'Map',         href: '#map' },
-  { label: 'Methodology', href: '#methodology' },
+  { label: 'Methodology', href: '#methodology-implementation' },
 ];
 
 export default function Header({ activeView, onViewChange }) {
