@@ -55,6 +55,7 @@ export default function MapView({ filters, setFilters, pinnedCountry, setPinnedC
   const { scoreKey, regions, regimes } = filters;
   const [hoveredCountry, setHoveredCountry] = useState(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
 
   const driver = drivers.find(d => d.key === scoreKey) || drivers[0];
 
@@ -72,6 +73,7 @@ export default function MapView({ filters, setFilters, pinnedCountry, setPinnedC
   const legendStops = [0, 25, 50, 75, 100];
 
   return (
+    <>
     <section id="map" style={{ padding: '48px 0', borderTop: '1px solid var(--colour-border)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
         <div style={{ marginBottom: 20 }}>
@@ -240,8 +242,8 @@ export default function MapView({ filters, setFilters, pinnedCountry, setPinnedC
             )}
           </div>
 
-          {/* Pinned country card */}
-          {pinnedCountry && (
+          {/* Pinned country card — desktop side panel only */}
+          {pinnedCountry && !isMobile && (
             <div style={{ width: 280, flexShrink: 0 }}>
               <CountryCard
                 country={pinnedCountry}
@@ -254,5 +256,17 @@ export default function MapView({ filters, setFilters, pinnedCountry, setPinnedC
         </div>
       </div>
     </section>
+
+    {/* Mobile bottom-sheet overlay */}
+    {pinnedCountry && isMobile && (
+      <div style={{ position:'fixed', inset:0, zIndex:400, background:'rgba(0,0,0,0.35)', display:'flex', alignItems:'flex-end', justifyContent:'center' }}
+        onClick={() => setPinnedCountry(null)}>
+        <div style={{ width:'100%', maxWidth:480, padding:'0 12px 24px', maxHeight:'75vh', overflowY:'auto' }}
+          onClick={e => e.stopPropagation()}>
+          <CountryCard country={pinnedCountry} mode="pinned" onClose={() => setPinnedCountry(null)} onViewProfile={handleViewProfile} />
+        </div>
+      </div>
+    )}
+    </>
   );
 }

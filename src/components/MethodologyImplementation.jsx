@@ -66,6 +66,34 @@ function Block({ block }) {
           {block.items.map((item, i) => <li key={i} style={{ marginBottom: 4 }}>{item}</li>)}
         </ul>
       );
+    case 'image':
+      return (
+        <div style={{ marginBottom: 24 }}>
+          <img
+            src={block.src}
+            alt={block.caption || ''}
+            style={{
+              maxWidth: '100%',
+              border: '1px solid var(--colour-border)',
+              borderRadius: 6,
+              display: 'block',
+            }}
+          />
+          {block.caption && (
+            <div style={{
+              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontSize: 12,
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              color: 'var(--colour-text-muted)',
+              marginTop: 8,
+            }}>
+              {block.caption}
+            </div>
+          )}
+        </div>
+      );
     case 'table':
       return (
         <div style={{ marginBottom: 24, overflowX: 'auto' }}>
@@ -138,7 +166,7 @@ export default function MethodologyImplementation() {
 
             {expanded && (
               <a
-                href="https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@main/public/CORDA_Methodology_Implementation_v2.pdf"
+                href="https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@main/public/CORDA_Methodology_Implementation_v3.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="filter-btn"

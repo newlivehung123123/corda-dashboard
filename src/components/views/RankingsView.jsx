@@ -43,9 +43,12 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
 
   const sorted = [...allCountries].sort((a, b) => b[scoreKey] - a[scoreKey]);
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+
   const handleHover = useCallback((country) => {
+    if (isMobile) return;
     setHoveredCountry(country || null);
-  }, []);
+  }, [isMobile]);
 
   const handleClick = (country) => {
     if (!country) return;
@@ -57,9 +60,24 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
     if (el) el.scrollIntoView({ behavior: 'smooth' });
     setFilters(f => ({ ...f, highlightCountries: [country.name] }));
   };
+  const barHeight = isMobile ? 20 : 38;
+  const yAxisWidth = isMobile ? 62 : 130;
+  const leftMargin = isMobile ? 64 : 140;
+  const rightMargin = isMobile ? 32 : 80;
+  const labelFontSize = isMobile ? 9 : 12;
+  const chartHeight = sorted.length * (barHeight + (isMobile ? 6 : 10)) + 60;
 
-  const barHeight = 38;
-  const chartHeight = sorted.length * (barHeight + 10) + 80;
+  const mobileLabel = (name) => {
+    const abbr = {
+      'United Kingdom': 'UK',
+      'United States': 'USA',
+      'United Arab Emirates': 'UAE',
+      'New Zealand': 'N. Zealand',
+      'South Korea': 'S. Korea',
+      'South Africa': 'S. Africa',
+    };
+    return abbr[name] || name;
+  };
 
   return (
     <section id="rankings" style={{ padding: '48px 0' }}>
@@ -89,11 +107,13 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
               <BarChart
                 layout="vertical"
                 data={sorted}
-                margin={{ top: 8, right: 80, left: 140, bottom: 8 }}
+                margin={{ top: 8, right: rightMargin, left: leftMargin, bottom: 8 }}
                 barSize={barHeight}
-                onMouseMove={(state) => {
-                  if (state.isTooltipActive && state.activePayload?.length) {
-                    setTooltipPos({ x: state.chartX, y: state.chartY });
+                onMouseMove={(state, event) => {
+                  if (isMobile) return;
+                  if (state.isTooltipActive && state.activePayload?.length && event) {
+                    const e = event.nativeEvent || event;
+                    setTooltipPos({ x: e.clientX, y: e.clientY });
                   }
                 }}
               >
@@ -113,23 +133,24 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
                 <YAxis
                   type="category"
                   dataKey="name"
-                  width={130}
+                  width={yAxisWidth}
                   tick={({ x, y, payload }) => {
                     const country = sorted.find(c => c.name === payload.value);
                     const isHighlighted = highlightCountries.includes(payload.value);
                     const filtered = country ? isFiltered(country, regions, regimes) : true;
+                    const label = isMobile ? mobileLabel(payload.value) : payload.value;
                     return (
                       <text
-                        x={x - 6}
+                        x={x - 4}
                         y={y}
                         textAnchor="end"
                         dominantBaseline="middle"
                         fontFamily="'Source Sans 3', system-ui, sans-serif"
-                        fontSize={12}
+                        fontSize={labelFontSize}
                         fill={filtered ? (isHighlighted ? '#2B4C7E' : '#1A1A1A') : '#C0B89A'}
                         fontWeight={isHighlighted ? 700 : 400}
                       >
-                        {payload.value}
+                        {label}
                       </text>
                     );
                   }}
@@ -240,8 +261,8 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
             </ResponsiveContainer>
           </div>
 
-          {/* Pinned country card */}
-          {pinnedCountry && (
+          {/* Pinned country card — side panel on desktop, fixed overlay on mobile */}
+          {pinnedCountry && !isMobile && (
             <div style={{ width: 280, flexShrink: 0 }}>
               <CountryCard
                 country={pinnedCountry}
@@ -253,12 +274,57 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
           )}
         </div>
 
+        {/* Pinned card mobile overlay */}
+        {pinnedCountry && isMobile && (
+          <div
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 400,
+              background: 'rgba(0,0,0,0.35)',
+              display: 'flex',
+              alignItems: 'flex-end',
+              justifyContent: 'center',
+            }}
+            onClick={() => setPinnedCountry(null)}
+          >
+            <div
+              style={{
+                width: '100%',
+                maxWidth: 480,
+                padding: '0 12px 24px',
+                maxHeight: '75vh',
+                overflowY: 'auto',
+              }}
+              onClick={e => e.stopPropagation()}
+            >
+              <CountryCard
+                country={pinnedCountry}
+                mode="pinned"
+                onClose={() => setPinnedCountry(null)}
+                onViewProfile={handleViewProfile}
+              />
+            </div>
+          </div>
+        )}
+
         {/* Hover tooltip */}
-        {hoveredCountry && !pinnedCountry && (
+        {hoveredCountry && !pinnedCountry && !isMobile && (() => {
+          const cardH = 320;
+          const cardW = 280;
+          const vw = typeof window !== 'undefined' ? window.innerWidth : 1200;
+          const vh = typeof window !== 'undefined' ? window.innerHeight : 800;
+          const top = tooltipPos.y + cardH + 20 > vh
+            ? tooltipPos.y - cardH - 10
+            : tooltipPos.y + 20;
+          const left = tooltipPos.x + cardW + 20 > vw
+            ? tooltipPos.x - cardW - 10
+            : tooltipPos.x + 20;
+          return (
           <div style={{
             position: 'fixed',
-            left: tooltipPos.x + 20,
-            top: tooltipPos.y + 20,
+            left: Math.max(8, left),
+            top: Math.max(8, top),
             zIndex: 300,
             pointerEvents: 'none',
           }}>
@@ -268,7 +334,8 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
               onViewProfile={handleViewProfile}
             />
           </div>
-        )}
+          );
+        })()}
 
         {/* Legend */}
         {scoreKey === 'corda' && (

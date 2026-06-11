@@ -88,6 +88,7 @@ function CustomTooltipContent({ active, payload, onHover }) {
 export default function ScatterView({ filters, setFilters, pinnedCountry, setPinnedCountry }) {
   const { regions, regimes, highlightCountries, colorBy, scatterX, scatterY } = filters;
   const [hoveredCountry, setHoveredCountry] = useState(null);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
 
   const localColorBy = colorBy;
   const xKey = scatterX;
@@ -128,6 +129,7 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
   ];
 
   return (
+    <>
     <section id="scatter" style={{ padding: '48px 0', borderTop: '1px solid var(--colour-border)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
         <div style={{ marginBottom: 20 }}>
@@ -304,8 +306,8 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
             </ResponsiveContainer>
           </div>
 
-          {/* Pinned card */}
-          {pinnedCountry && (
+          {/* Pinned card — desktop side panel only */}
+          {pinnedCountry && !isMobile && (
             <div style={{ width: 280, flexShrink: 0 }}>
               <CountryCard
                 country={pinnedCountry}
@@ -362,5 +364,17 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
         </div>
       </div>
     </section>
+
+    {/* Mobile bottom-sheet overlay */}
+    {pinnedCountry && isMobile && (
+      <div style={{ position:'fixed', inset:0, zIndex:400, background:'rgba(0,0,0,0.35)', display:'flex', alignItems:'flex-end', justifyContent:'center' }}
+        onClick={() => setPinnedCountry(null)}>
+        <div style={{ width:'100%', maxWidth:480, padding:'0 12px 24px', maxHeight:'75vh', overflowY:'auto' }}
+          onClick={e => e.stopPropagation()}>
+          <CountryCard country={pinnedCountry} mode="pinned" onClose={() => setPinnedCountry(null)} onViewProfile={() => {}} />
+        </div>
+      </div>
+    )}
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { drivers } from '../data/drivers.js';
 
 const REGIONS = ['Europe', 'Asia-Pacific', 'Americas', 'Middle East & Africa'];
@@ -24,6 +24,13 @@ Classifications are static, reflecting 2024 conditions. Source: V-Dem Institute,
 export default function FilterBar({ filters, setFilters }) {
   const { activeView, scoreKey, regions, regimes } = filters;
   const [showRegimeNote, setShowRegimeNote] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+
+  // Close filters panel when switching to desktop
+  useEffect(() => {
+    if (!isMobile) setFiltersOpen(false);
+  }, [isMobile]);
 
   const updateFilter = (key, value) => setFilters(f => ({ ...f, [key]: value }));
 
@@ -36,6 +43,80 @@ export default function FilterBar({ filters, setFilters }) {
       };
     });
   };
+
+  const activeFilterCount = regions.length + regimes.length + (scoreKey !== 'corda' ? 1 : 0);
+
+  if (isMobile) {
+    return (
+      <div id="filter-bar" style={{
+        position: 'sticky', top: 56, zIndex: 90,
+        background: 'var(--colour-bg)',
+        borderBottom: '1px solid var(--colour-border)',
+      }}>
+        {/* Mobile: compact row — VIEW tabs + Filters toggle */}
+        <div style={{
+          padding: '8px 16px',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
+        }}>
+          <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
+            {VIEWS.map(v => (
+              <button key={v.key}
+                className={`filter-btn${activeView === v.key ? ' active' : ''}`}
+                onClick={() => updateFilter('activeView', v.key)}
+              >{v.label}</button>
+            ))}
+          </div>
+          <button
+            onClick={() => setFiltersOpen(o => !o)}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 5,
+              background: filtersOpen ? 'var(--colour-accent)' : 'var(--colour-bg-card)',
+              border: '1px solid var(--colour-border-strong)',
+              borderRadius: 20, padding: '6px 12px', cursor: 'pointer',
+              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontSize: 13, fontWeight: 600,
+              color: filtersOpen ? '#fff' : 'var(--colour-text-muted)',
+            }}
+          >
+            Filters{activeFilterCount > 0 ? ` (${activeFilterCount})` : ''}
+          </button>
+        </div>
+
+        {/* Mobile: expanded filters panel */}
+        {filtersOpen && (
+          <div style={{ padding: '8px 16px 16px', borderTop: '1px solid var(--colour-border)' }}>
+            {/* Score */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+              <span style={{ fontFamily: "'Source Sans 3', system-ui, sans-serif", fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--colour-text-muted)', whiteSpace: 'nowrap' }}>Score</span>
+              <select value={scoreKey} onChange={e => updateFilter('scoreKey', e.target.value)} style={{ flex: 1 }}>
+                {drivers.map(d => <option key={d.key} value={d.key}>{d.shortLabel}</option>)}
+              </select>
+            </div>
+            {/* Region */}
+            <div style={{ marginBottom: 10 }}>
+              <span style={{ fontFamily: "'Source Sans 3', system-ui, sans-serif", fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--colour-text-muted)', display: 'block', marginBottom: 6 }}>Region</span>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                <button className={`filter-btn${regions.length === 0 ? ' active' : ''}`} onClick={() => updateFilter('regions', [])}>All</button>
+                {REGIONS.map(r => (
+                  <button key={r} className={`filter-btn${regions.includes(r) ? ' active' : ''}`} onClick={() => toggleArray('regions', r)}>{r}</button>
+                ))}
+              </div>
+            </div>
+            {/* Regime */}
+            <div>
+              <span style={{ fontFamily: "'Source Sans 3', system-ui, sans-serif", fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--colour-text-muted)', display: 'block', marginBottom: 6 }}>Regime</span>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                <button className={`filter-btn${regimes.length === 0 ? ' active' : ''}`} onClick={() => updateFilter('regimes', [])}>All</button>
+                {REGIMES.map(r => (
+                  <button key={r} className={`filter-btn${regimes.includes(r) ? ' active' : ''}`} onClick={() => toggleArray('regimes', r)}>{r.replace(' Democracy', '')}</button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div

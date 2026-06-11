@@ -55,24 +55,13 @@ export default function CountryCard({ country, mode = 'tooltip', onClose, onView
   const isTooltip = mode === 'tooltip';
   const isPinned = mode === 'pinned';
 
-  const cardStyle = isPinned ? {
-    position: 'fixed',
-    right: 20,
-    top: 120,
-    width: 300,
-    zIndex: 200,
-    background: 'var(--colour-bg-card)',
-    border: '1px solid var(--colour-border-strong)',
-    borderRadius: 6,
-    boxShadow: '0 4px 24px var(--colour-shadow)',
-    padding: 20,
-  } : {
+  const cardStyle = {
     background: 'var(--colour-bg-card)',
     border: '1px solid var(--colour-border-strong)',
     borderRadius: 6,
     boxShadow: '0 4px 24px rgba(0,0,0,0.15)',
-    padding: 16,
-    width: 260,
+    padding: isPinned ? 20 : 16,
+    width: isPinned ? 300 : 260,
     pointerEvents: isTooltip ? 'none' : 'auto',
   };
 
@@ -186,30 +175,6 @@ export default function CountryCard({ country, mode = 'tooltip', onClose, onView
         ))}
       </div>
 
-      {/* View profile link */}
-      <div style={{ marginTop: 14, borderTop: '1px solid var(--colour-border)', paddingTop: 10 }}>
-        <button
-          onClick={() => onViewProfile && onViewProfile(country)}
-          aria-label={`View full profile for ${country.name}`}
-          tabIndex={0}
-          onKeyDown={(e) => e.key === 'Enter' && onViewProfile && onViewProfile(country)}
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            fontFamily: "'Source Sans 3', system-ui, sans-serif",
-            fontSize: 12,
-            fontWeight: 600,
-            color: 'var(--colour-accent)',
-            padding: 0,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 4,
-          }}
-        >
-          View full profile →
-        </button>
-      </div>
     </div>
   );
 }

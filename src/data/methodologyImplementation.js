@@ -26,6 +26,11 @@ export const previewBlocks = [
       ['D5', 'Polarisation & effective tribalism', 'Iyengar et al. (2019); Abramowitz (2010, 2018)', 'Sufficiently deep partisan divisions make democratic correction harder independently of policy content; when partisan identity becomes tribal, voters tolerate anti-democratic behaviour by co-partisans, and cross-partisan coalitions for institutional investment become structurally unavailable.'],
     ],
   },
+  {
+    type: 'image',
+    src: '/figures/figure0.png',
+    caption: 'Figure 0. Causal directed graph of the five theoretical drivers',
+  },
 ];
 
 export const fullBlocks = [
@@ -388,6 +393,26 @@ export const fullBlocks = [
   {
     type: 'p',
     text: 'The interface enables users to customise their view based on their preferences and interests. It offers three main data views: a ranking view as stacked bar charts; a two-axis scatter plot for comparing different drivers with each other or with the overall score; and a world map. The world map view allows users to click a country to review its score, with the colour intensity corresponding to the democratic health level (darker navy indicating better performance). Users can choose to view the composite score or individual driver scores.',
+  },
+  {
+    type: 'image',
+    src: '/figures/figure1.png',
+    caption: 'Figure 1. CORDA Dashboard filter',
+  },
+  {
+    type: 'image',
+    src: '/figures/figure2.png',
+    caption: 'Figure 2. CORDA rankings — stacked bar view',
+  },
+  {
+    type: 'image',
+    src: '/figures/figure3.png',
+    caption: 'Figure 3. CORDA rankings — scatter plot view',
+  },
+  {
+    type: 'image',
+    src: '/figures/figure4.png',
+    caption: 'Figure 4. CORDA world map view',
   },
 
   { type: 'h2', text: 'Note on AI usage' },
