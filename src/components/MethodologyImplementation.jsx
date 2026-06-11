@@ -138,7 +138,7 @@ export default function MethodologyImplementation() {
 
             {expanded && (
               <a
-                href="https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@main/public/CORDA_Methodology_Implementation.pdf"
+                href="https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@main/public/CORDA_Methodology_Implementation_v2.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="filter-btn"
