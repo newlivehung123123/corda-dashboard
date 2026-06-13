@@ -30,7 +30,7 @@ jobs:
           api = HfApi()
           api.upload_folder(
               folder_path='.',
-              repo_id='newlivehung/corda-democracy',
+              repo_id='newlivehung/corda',
               repo_type='space',
               commit_message='Deploy from GitHub',
           )
