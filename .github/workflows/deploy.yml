@@ -24,9 +24,14 @@ jobs:
         run: |
           cd dist
           python3 -c "open('README.md','w').write('---\ntitle: CORDA Democratic AI-Readiness Index\nemoji: \"\xf0\x9f\x93\x8a\"\ncolorFrom: blue\ncolorTo: indigo\nsdk: static\npinned: false\n---\n')"
-          git init -b main
-          git config user.email "deploy@corda.demo"
-          git config user.name "CORDA Deploy"
-          git add .
-          git commit -m "Deploy from GitHub"
-          git push --force https://newlivehung:$HF_TOKEN@huggingface.co/spaces/newlivehung/corda-democracy main
+          pip install -q -U huggingface_hub
+          python3 -c "
+          from huggingface_hub import HfApi
+          api = HfApi()
+          api.upload_folder(
+              folder_path='.',
+              repo_id='newlivehung/corda-democracy',
+              repo_type='space',
+              commit_message='Deploy from GitHub',
+          )
+          "
