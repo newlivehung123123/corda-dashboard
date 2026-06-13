@@ -23,7 +23,7 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           cd dist
-          python3 -c "open('README.md','w').write('---\ntitle: CORDA Democratic AI-Readiness Index\nemoji: \"\xf0\x9f\x93\x8a\"\ncolorFrom: blue\ncolorTo: indigo\nsdk: static\npinned: false\n---\n')"
+          python3 -c "open('README.md','w').write('---\ntitle: CORDA Democratic AI-Readiness Index\nemoji: \"\U0001F4CA\"\ncolorFrom: blue\ncolorTo: indigo\nsdk: static\npinned: false\n---\n')"
           pip install -q -U huggingface_hub
           python3 -c "
           from huggingface_hub import HfApi
