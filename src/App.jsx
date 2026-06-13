@@ -7,6 +7,7 @@ import ScatterView from './components/views/ScatterView.jsx';
 import MapView from './components/views/MapView.jsx';
 import MissionVision from './components/MissionVision.jsx';
 import MethodologyImplementation from './components/MethodologyImplementation.jsx';
+import ResourceLinks from './components/ResourceLinks.jsx';
 import RegimeClassification from './components/RegimeClassification.jsx';
 import AnalyticalMethods from './components/AnalyticalMethods.jsx';
 import Footer from './components/Footer.jsx';
@@ -76,6 +77,7 @@ export default function App() {
 
       <MissionVision />
       <MethodologyImplementation />
+      <ResourceLinks />
       <RegimeClassification />
       <AnalyticalMethods />
       <Footer />
