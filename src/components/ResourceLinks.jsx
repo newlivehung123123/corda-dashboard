@@ -8,7 +8,7 @@ const tabs = [
   },
   {
     label: 'Public Access Data',
-    href: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@main/public/CORDA_Public_Access_Data.zip',
+    href: './CORDA_Public_Access_Data.zip',
     download: true,
   },
 ];
