@@ -3,7 +3,7 @@ import React from 'react';
 const tabs = [
   {
     label: '2025 Edition Report',
-    href: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@main/public/CORDA_2025_Global_Rankings.pdf',
+    href: './CORDA_2025_Global_Rankings.pdf',
     download: false,
   },
   {
