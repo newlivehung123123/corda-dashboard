@@ -28,7 +28,7 @@ export const previewBlocks = [
   },
   {
     type: 'image',
-    src: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@main/public/figures/figure0.png',
+    src: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@e2d6e64ffc2c96ce5f4059801be5ca37ea0bf8d2/public/figures/figure0.png',
     caption: 'Figure 0. Causal directed graph of the five theoretical drivers',
   },
 ];
@@ -396,7 +396,7 @@ export const fullBlocks = [
   },
   {
     type: 'image',
-    src: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@main/public/figures/figure1.png',
+    src: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@e2d6e64ffc2c96ce5f4059801be5ca37ea0bf8d2/public/figures/figure1.png',
     caption: 'Figure 1. CORDA Dashboard filter',
   },
   {
