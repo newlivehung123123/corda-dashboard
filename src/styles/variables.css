@@ -1,8 +1,8 @@
 :root {
   /* Background */
-  --colour-bg:          #F5F0E8;
-  --colour-bg-card:     #EFEAD9;
-  --colour-bg-overlay:  #E8E1CE;
+  --colour-bg:          #FFFFFF;
+  --colour-bg-card:     #F5F5F5;
+  --colour-bg-overlay:  #EAEAEA;
 
   /* Text */
   --colour-text:        #1A1A1A;
@@ -28,9 +28,9 @@
   --colour-authoritarian: #E15759;
 
   /* UI */
-  --colour-border:        rgba(139, 110, 20, 0.15);
-  --colour-border-strong: rgba(139, 110, 20, 0.30);
-  --colour-shadow:        rgba(43, 76, 126, 0.04);
+  --colour-border:        rgba(0, 0, 0, 0.10);
+  --colour-border-strong: rgba(0, 0, 0, 0.18);
+  --colour-shadow:        rgba(0, 0, 0, 0.04);
 
   /* Region colours */
   --colour-region-europe: #4E79A7;

@@ -80,7 +80,7 @@ function SingleRadar({ country, showMean = true, fillColour = '#2B4C7E', opacity
 
       <ResponsiveContainer width="100%" height={220}>
         <RadarChart data={data} margin={{ top: 8, right: 20, bottom: 8, left: 20 }}>
-          <PolarGrid stroke="#D4CAAF" />
+          <PolarGrid stroke="#D4D4D4" />
           <PolarAngleAxis
             dataKey="subject"
             tick={{
@@ -101,8 +101,8 @@ function SingleRadar({ country, showMean = true, fillColour = '#2B4C7E', opacity
               name="Global Mean"
               dataKey="value"
               data={meanData}
-              stroke="#C0B89A"
-              fill="#C0B89A"
+              stroke="#BDBDBD"
+              fill="#BDBDBD"
               fillOpacity={0.15}
               strokeDasharray="4 2"
             />
@@ -132,7 +132,7 @@ function SingleRadar({ country, showMean = true, fillColour = '#2B4C7E', opacity
         <div style={{
           marginTop: 8,
           padding: '8px 10px',
-          background: '#FFF8E7',
+          background: '#F5F5F5',
           border: '1px solid var(--colour-accent-2)',
           borderRadius: 4,
           fontSize: 11,
@@ -177,7 +177,7 @@ function DefaultOverlayRadar() {
 
       <ResponsiveContainer width="100%" height={320}>
         <RadarChart data={denmarkData} margin={{ top: 10, right: 30, bottom: 10, left: 30 }}>
-          <PolarGrid stroke="#D4CAAF" />
+          <PolarGrid stroke="#D4D4D4" />
           <PolarAngleAxis
             dataKey="subject"
             tick={{

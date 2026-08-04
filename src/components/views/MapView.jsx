@@ -33,12 +33,12 @@ const NAME_TO_ISO3 = {
 const countryMap = Object.fromEntries(allCountries.map(c => [c.iso3, c]));
 
 function getScoreColour(score, scoreKey) {
-  if (score === undefined || score === null) return '#E0D9C8';
+  if (score === undefined || score === null) return '#E0E0E0';
   const t = score / 100;
-  // Interpolate from cream (#F5F0E8) to CORDA navy (#2B4C7E)
-  const r = Math.round(245 + (43 - 245) * t);
-  const g = Math.round(240 + (76 - 240) * t);
-  const b = Math.round(232 + (126 - 232) * t);
+  // Interpolate from white (#FFFFFF) to CORDA navy (#2B4C7E)
+  const r = Math.round(255 + (43 - 255) * t);
+  const g = Math.round(255 + (76 - 255) * t);
+  const b = Math.round(255 + (126 - 255) * t);
   return `rgb(${r},${g},${b})`;
 }
 
@@ -115,8 +115,8 @@ export default function MapView({ filters, setFilters, pinnedCountry, setPinnedC
                         const score = country ? country[scoreKey] : undefined;
                         const filtered = country ? isFiltered(country) : false;
                         const fill = country
-                          ? (filtered ? getScoreColour(score) : '#D4CAAF')
-                          : '#E0D9C8';
+                          ? (filtered ? getScoreColour(score) : '#D4D4D4')
+                          : '#E0E0E0';
                         const isPinned = pinnedCountry && country?.iso3 === pinnedCountry.iso3;
                         const isHovered = hoveredCountry && country?.iso3 === hoveredCountry.iso3;
 
@@ -125,7 +125,7 @@ export default function MapView({ filters, setFilters, pinnedCountry, setPinnedC
                             key={geo.rsmKey}
                             geography={geo}
                             fill={fill}
-                            stroke={isPinned || isHovered ? '#8B6914' : '#D4CAAF'}
+                            stroke={isPinned || isHovered ? '#8B6914' : '#D4D4D4'}
                             strokeWidth={isPinned || isHovered ? 1.5 : 0.5}
                             style={{
                               default: { outline: 'none', transition: 'fill 0.2s' },
@@ -177,7 +177,7 @@ export default function MapView({ filters, setFilters, pinnedCountry, setPinnedC
                 flex: 1,
                 height: 14,
                 borderRadius: 7,
-                background: 'linear-gradient(to right, #F5F0E8, #2B4C7E)',
+                background: 'linear-gradient(to right, #FFFFFF, #2B4C7E)',
                 border: '1px solid var(--colour-border)',
                 position: 'relative',
               }}>

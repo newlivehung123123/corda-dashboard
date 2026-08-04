@@ -117,7 +117,7 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
                   }
                 }}
               >
-                <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#D4CAAF" />
+                <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#D4D4D4" />
                 <XAxis
                   type="number"
                   domain={[0, 100]}
@@ -128,7 +128,7 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
                     fill: '#5A5448',
                   }}
                   tickLine={false}
-                  axisLine={{ stroke: '#D4CAAF' }}
+                  axisLine={{ stroke: '#D4D4D4' }}
                 />
                 <YAxis
                   type="category"
@@ -147,7 +147,7 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
                         dominantBaseline="middle"
                         fontFamily="'Source Sans 3', system-ui, sans-serif"
                         fontSize={labelFontSize}
-                        fill={filtered ? (isHighlighted ? '#2B4C7E' : '#1A1A1A') : '#C0B89A'}
+                        fill={filtered ? (isHighlighted ? '#2B4C7E' : '#1A1A1A') : '#BDBDBD'}
                         fontWeight={isHighlighted ? 700 : 400}
                       >
                         {label}
@@ -203,7 +203,7 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
                                 fontFamily="'Source Sans 3', system-ui, sans-serif"
                                 fontSize={11}
                                 fontWeight={600}
-                                fill={filtered ? '#1A1A1A' : '#C0B89A'}
+                                fill={filtered ? '#1A1A1A' : '#BDBDBD'}
                               >
                                 {country.corda.toFixed(1)}
                               </text>
@@ -248,7 +248,7 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
                             fontFamily="'Source Sans 3', system-ui, sans-serif"
                             fontSize={11}
                             fontWeight={600}
-                            fill={filtered ? '#1A1A1A' : '#C0B89A'}
+                            fill={filtered ? '#1A1A1A' : '#BDBDBD'}
                           >
                             {(+value).toFixed(1)}
                           </text>

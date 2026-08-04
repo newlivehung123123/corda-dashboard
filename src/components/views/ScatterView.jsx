@@ -212,7 +212,7 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
                 margin={{ top: 20, right: 30, bottom: 40, left: 40 }}
                 onClick={handleClick}
               >
-                <CartesianGrid stroke="#D4CAAF" strokeDasharray="3 3" />
+                <CartesianGrid stroke="#D4D4D4" strokeDasharray="3 3" />
                 <XAxis
                   type="number"
                   dataKey="x"
@@ -223,7 +223,7 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
                     fontSize: 11,
                     fill: '#5A5448',
                   }}
-                  axisLine={{ stroke: '#D4CAAF' }}
+                  axisLine={{ stroke: '#D4D4D4' }}
                   tickLine={false}
                 >
                   <Label
@@ -248,7 +248,7 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
                     fontSize: 11,
                     fill: '#5A5448',
                   }}
-                  axisLine={{ stroke: '#D4CAAF' }}
+                  axisLine={{ stroke: '#D4D4D4' }}
                   tickLine={false}
                 >
                   <Label
@@ -268,13 +268,13 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
                 {/* Midpoint reference lines */}
                 <ReferenceLine
                   x={50}
-                  stroke="#A89E7E"
+                  stroke="#A3A3A3"
                   strokeDasharray="5 3"
                   strokeWidth={1}
                 />
                 <ReferenceLine
                   y={50}
-                  stroke="#A89E7E"
+                  stroke="#A3A3A3"
                   strokeDasharray="5 3"
                   strokeWidth={1}
                 />
