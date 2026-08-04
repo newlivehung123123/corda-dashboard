@@ -28,7 +28,7 @@ export const previewBlocks = [
   },
   {
     type: 'image',
-    src: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@e2d6e64ffc2c96ce5f4059801be5ca37ea0bf8d2/public/figures/figure0.png',
+    src: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@51c7c21ffce1ae5975a25cc5ce78ed375bd94e33/public/figures/figure0.png',
     caption: 'Figure 0. Causal directed graph of the five theoretical drivers',
   },
 ];
@@ -396,22 +396,22 @@ export const fullBlocks = [
   },
   {
     type: 'image',
-    src: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@e2d6e64ffc2c96ce5f4059801be5ca37ea0bf8d2/public/figures/figure1.png',
+    src: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@51c7c21ffce1ae5975a25cc5ce78ed375bd94e33/public/figures/figure1.png',
     caption: 'Figure 1. CORDA Dashboard filter',
   },
   {
     type: 'image',
-    src: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@main/public/figures/figure2.png',
+    src: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@51c7c21ffce1ae5975a25cc5ce78ed375bd94e33/public/figures/figure2.png',
     caption: 'Figure 2. CORDA rankings — stacked bar view',
   },
   {
     type: 'image',
-    src: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@main/public/figures/figure3.png',
+    src: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@51c7c21ffce1ae5975a25cc5ce78ed375bd94e33/public/figures/figure3.png',
     caption: 'Figure 3. CORDA rankings — scatter plot view',
   },
   {
     type: 'image',
-    src: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@main/public/figures/figure4.png',
+    src: 'https://cdn.jsdelivr.net/gh/newlivehung123123/corda-dashboard@51c7c21ffce1ae5975a25cc5ce78ed375bd94e33/public/figures/figure4.png',
     caption: 'Figure 4. CORDA world map view',
   },
 
