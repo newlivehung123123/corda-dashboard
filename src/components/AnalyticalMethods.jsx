@@ -40,10 +40,11 @@ export default function AnalyticalMethods() {
         background: 'var(--colour-bg)',
       }}
     >
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '64px 24px' }}>
-        <h2 style={{ fontSize: 32, marginBottom: 8 }}>Analytical Methods</h2>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(56px, 6.5vw, 92px) 24px' }}>
+        <p className="eyebrow">Research design</p>
+        <h2 style={{ margin: '0 0 8px' }}>Analytical Methods</h2>
         <p style={{
-          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontFamily: "'Figtree', system-ui, sans-serif",
           fontSize: 15,
           color: 'var(--colour-text-muted)',
           marginBottom: 28,
@@ -64,7 +65,7 @@ export default function AnalyticalMethods() {
               }}>
                 {method.bullets.map((bullet, i) => (
                   <li key={i} style={{
-                    fontFamily: "'Source Serif 4', Georgia, serif",
+                    fontFamily: "'Figtree', system-ui, sans-serif",
                     fontSize: 15,
                     color: 'var(--colour-text)',
                     lineHeight: 1.75,

@@ -71,7 +71,7 @@ export default function CountryCard({ country, mode = 'tooltip', onClose, onView
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
         <div>
           <div style={{
-            fontFamily: "'Playfair Display', Georgia, serif",
+            fontFamily: "'Figtree', system-ui, sans-serif",
             fontWeight: 700,
             fontSize: 16,
             color: 'var(--colour-text)',
@@ -82,7 +82,7 @@ export default function CountryCard({ country, mode = 'tooltip', onClose, onView
             <span>{flag}</span>
             <span>{country.name}</span>
             <span style={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 12,
               fontWeight: 600,
               color: '#fff',
@@ -95,7 +95,7 @@ export default function CountryCard({ country, mode = 'tooltip', onClose, onView
             </span>
           </div>
           <div style={{
-            fontFamily: "'Source Sans 3', system-ui, sans-serif",
+            fontFamily: "'Figtree', system-ui, sans-serif",
             fontSize: 12,
             color: 'var(--colour-text-muted)',
             marginTop: 2,
@@ -130,7 +130,7 @@ export default function CountryCard({ country, mode = 'tooltip', onClose, onView
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
           <span style={{
-            fontFamily: "'Source Sans 3', system-ui, sans-serif",
+            fontFamily: "'Figtree', system-ui, sans-serif",
             fontSize: 12,
             fontWeight: 600,
             color: 'var(--colour-text)',
@@ -138,7 +138,7 @@ export default function CountryCard({ country, mode = 'tooltip', onClose, onView
             CORDA Score
           </span>
           <span style={{
-            fontFamily: "'Source Sans 3', system-ui, sans-serif",
+            fontFamily: "'Figtree', system-ui, sans-serif",
             fontSize: 13,
             fontWeight: 700,
             color: 'var(--colour-accent)',
@@ -155,14 +155,14 @@ export default function CountryCard({ country, mode = 'tooltip', onClose, onView
           <div key={driver.key}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
               <span style={{
-                fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                fontFamily: "'Figtree', system-ui, sans-serif",
                 fontSize: 11,
                 color: 'var(--colour-text-muted)',
               }}>
                 {driver.shortLabel}
               </span>
               <span style={{
-                fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                fontFamily: "'Figtree', system-ui, sans-serif",
                 fontSize: 11,
                 fontWeight: 600,
                 color: 'var(--colour-text)',

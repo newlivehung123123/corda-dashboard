@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useMemo } from 'react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   Cell, ResponsiveContainer, LabelList,
@@ -6,6 +6,7 @@ import {
 import { countries as allCountries } from '../../data/countries.js';
 import { drivers, scoreDrivers } from '../../data/drivers.js';
 import CountryCard from '../CountryCard.jsx';
+import { setHoverProfile, clearHoverProfile } from '../HoverProfile.jsx';
 
 const DRIVER_COLOURS = {
   d1: '#4E79A7',
@@ -21,34 +22,24 @@ function isFiltered(country, regions, regimes) {
   return regionOk && regimeOk;
 }
 
-function CustomTooltipWrapper({ active, payload, coordinate, onHover }) {
-  React.useEffect(() => {
-    if (active && payload && payload.length > 0) {
-      const c = payload[0]?.payload;
-      if (c) onHover(c);
-    } else {
-      onHover(null);
-    }
-  }, [active, payload, onHover]);
-  return null;
-}
+// Recharts needs a Tooltip mounted to work out what the pointer is over, but
+// the profile card is drawn elsewhere, so this one renders nothing.
+const renderNothing = () => null;
 
 export default function RankingsView({ filters, setFilters, pinnedCountry, setPinnedCountry }) {
   const { scoreKey, regions, regimes, highlightCountries } = filters;
-  const [hoveredCountry, setHoveredCountry] = useState(null);
-  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
 
   const driver = drivers.find(d => d.key === scoreKey) || drivers[0];
   const driverColour = scoreKey === 'corda' ? '#2B4C7E' : DRIVER_COLOURS[scoreKey];
 
-  const sorted = [...allCountries].sort((a, b) => b[scoreKey] - a[scoreKey]);
+  // The order only depends on the driver, so it is worked out once rather than
+  // on every render.
+  const sorted = useMemo(
+    () => [...allCountries].sort((a, b) => b[scoreKey] - a[scoreKey]),
+    [scoreKey],
+  );
 
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
-
-  const handleHover = useCallback((country) => {
-    if (isMobile) return;
-    setHoveredCountry(country || null);
-  }, [isMobile]);
 
   const handleClick = (country) => {
     if (!country) return;
@@ -83,9 +74,9 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
     <section id="rankings" style={{ padding: '48px 0' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
         <div style={{ marginBottom: 24 }}>
-          <h2 style={{ margin: 0 }}>Country Rankings</h2>
+          <h2 style={{ margin: 0, fontSize: 'clamp(24px, 2.4vw, 34px)', letterSpacing: '-0.016em' }}>Country Rankings</h2>
           <p style={{
-            fontFamily: "'Source Serif 4', Georgia, serif",
+            fontFamily: "'Figtree', system-ui, sans-serif",
             fontSize: 15,
             color: 'var(--colour-text-muted)',
             margin: '6px 0 0',
@@ -109,13 +100,21 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
                 data={sorted}
                 margin={{ top: 8, right: rightMargin, left: leftMargin, bottom: 8 }}
                 barSize={barHeight}
+                // Country and cursor position come from the same event, so the
+                // card can never appear before its position is known.
                 onMouseMove={(state, event) => {
                   if (isMobile) return;
-                  if (state.isTooltipActive && state.activePayload?.length && event) {
+                  const country = state?.isTooltipActive
+                    ? state.activePayload?.[0]?.payload
+                    : null;
+                  if (country && event) {
                     const e = event.nativeEvent || event;
-                    setTooltipPos({ x: e.clientX, y: e.clientY });
+                    setHoverProfile(country, e.clientX, e.clientY);
+                  } else {
+                    clearHoverProfile();
                   }
                 }}
+                onMouseLeave={clearHoverProfile}
               >
                 <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#D4D4D4" />
                 <XAxis
@@ -123,7 +122,7 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
                   domain={[0, 100]}
                   tickCount={6}
                   tick={{
-                    fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                    fontFamily: "'Figtree', system-ui, sans-serif",
                     fontSize: 11,
                     fill: '#5A5448',
                   }}
@@ -145,7 +144,7 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
                         y={y}
                         textAnchor="end"
                         dominantBaseline="middle"
-                        fontFamily="'Source Sans 3', system-ui, sans-serif"
+                        fontFamily="'Figtree', system-ui, sans-serif"
                         fontSize={labelFontSize}
                         fill={filtered ? (isHighlighted ? '#2B4C7E' : '#1A1A1A') : '#BDBDBD'}
                         fontWeight={isHighlighted ? 700 : 400}
@@ -157,11 +156,7 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
                   axisLine={false}
                   tickLine={false}
                 />
-                <Tooltip
-                  content={
-                    <CustomTooltipWrapper onHover={handleHover} />
-                  }
-                />
+                <Tooltip content={renderNothing} />
 
                 {scoreKey === 'corda' ? (
                   scoreDrivers.map(driver => (
@@ -200,7 +195,7 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
                                 x={x + width + 6}
                                 y={y + height / 2}
                                 dominantBaseline="middle"
-                                fontFamily="'Source Sans 3', system-ui, sans-serif"
+                                fontFamily="'Figtree', system-ui, sans-serif"
                                 fontSize={11}
                                 fontWeight={600}
                                 fill={filtered ? '#1A1A1A' : '#BDBDBD'}
@@ -245,7 +240,7 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
                             x={x + width + 6}
                             y={y + height / 2}
                             dominantBaseline="middle"
-                            fontFamily="'Source Sans 3', system-ui, sans-serif"
+                            fontFamily="'Figtree', system-ui, sans-serif"
                             fontSize={11}
                             fontWeight={600}
                             fill={filtered ? '#1A1A1A' : '#BDBDBD'}
@@ -308,34 +303,8 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
           </div>
         )}
 
-        {/* Hover tooltip */}
-        {hoveredCountry && !pinnedCountry && !isMobile && (() => {
-          const cardH = 320;
-          const cardW = 280;
-          const vw = typeof window !== 'undefined' ? window.innerWidth : 1200;
-          const vh = typeof window !== 'undefined' ? window.innerHeight : 800;
-          const top = tooltipPos.y + cardH + 20 > vh
-            ? tooltipPos.y - cardH - 10
-            : tooltipPos.y + 20;
-          const left = tooltipPos.x + cardW + 20 > vw
-            ? tooltipPos.x - cardW - 10
-            : tooltipPos.x + 20;
-          return (
-          <div style={{
-            position: 'fixed',
-            left: Math.max(8, left),
-            top: Math.max(8, top),
-            zIndex: 300,
-            pointerEvents: 'none',
-          }}>
-            <CountryCard
-              country={hoveredCountry}
-              mode="tooltip"
-              onViewProfile={handleViewProfile}
-            />
-          </div>
-          );
-        })()}
+        {/* The hover profile is drawn once at the app level, from a store this
+            chart only writes to. */}
 
         {/* Legend */}
         {scoreKey === 'corda' && (
@@ -356,7 +325,7 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
                   background: DRIVER_COLOURS[d.key],
                 }} />
                 <span style={{
-                  fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                  fontFamily: "'Figtree', system-ui, sans-serif",
                   fontSize: 12,
                   color: 'var(--colour-text-muted)',
                 }}>

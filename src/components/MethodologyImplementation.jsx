@@ -14,7 +14,7 @@ function Block({ block }) {
     case 'p':
       return (
         <p style={{
-          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontFamily: "'Figtree', system-ui, sans-serif",
           fontSize: 15,
           lineHeight: 1.7,
           color: 'var(--colour-text)',
@@ -26,7 +26,7 @@ function Block({ block }) {
     case 'note':
       return (
         <p style={{
-          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontFamily: "'Figtree', system-ui, sans-serif",
           fontSize: 13,
           lineHeight: 1.6,
           color: 'var(--colour-text-muted)',
@@ -39,7 +39,7 @@ function Block({ block }) {
     case 'formula':
       return (
         <p style={{
-          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontFamily: "'Figtree', system-ui, sans-serif",
           fontSize: 15,
           fontStyle: 'italic',
           color: 'var(--colour-text)',
@@ -56,7 +56,7 @@ function Block({ block }) {
     case 'list':
       return (
         <ul style={{
-          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontFamily: "'Figtree', system-ui, sans-serif",
           fontSize: 15,
           lineHeight: 1.7,
           color: 'var(--colour-text)',
@@ -81,7 +81,7 @@ function Block({ block }) {
           />
           {block.caption && (
             <div style={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 12,
               fontWeight: 600,
               textTransform: 'uppercase',
@@ -99,7 +99,7 @@ function Block({ block }) {
         <div style={{ marginBottom: 24, overflowX: 'auto' }}>
           {block.caption && (
             <div style={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 12,
               fontWeight: 600,
               textTransform: 'uppercase',
@@ -146,8 +146,9 @@ export default function MethodologyImplementation() {
         background: 'var(--colour-bg)',
       }}
     >
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '64px 24px' }}>
-        <h2 style={{ fontSize: 32, marginBottom: 8 }}>Methodology &amp; Implementation</h2>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(56px, 6.5vw, 92px) 24px' }}>
+        <p className="eyebrow">How the index is built</p>
+        <h2 style={{ margin: '0 0 8px' }}>Methodology &amp; Implementation</h2>
 
         <div style={{ maxWidth: 900, marginTop: 32 }}>
           {previewBlocks.map((block, i) => <Block key={i} block={block} />)}

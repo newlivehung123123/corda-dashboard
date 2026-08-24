@@ -49,7 +49,7 @@ export default function FilterBar({ filters, setFilters }) {
   if (isMobile) {
     return (
       <div id="filter-bar" style={{
-        position: 'sticky', top: 56, zIndex: 90,
+        position: 'sticky', top: 'calc(var(--header-bar-h) + 20px)', zIndex: 90,
         background: 'var(--colour-bg)',
         borderBottom: '1px solid var(--colour-border)',
       }}>
@@ -73,7 +73,7 @@ export default function FilterBar({ filters, setFilters }) {
               background: filtersOpen ? 'var(--colour-accent)' : 'var(--colour-bg-card)',
               border: '1px solid var(--colour-border-strong)',
               borderRadius: 20, padding: '6px 12px', cursor: 'pointer',
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 13, fontWeight: 600,
               color: filtersOpen ? '#fff' : 'var(--colour-text-muted)',
             }}
@@ -87,14 +87,14 @@ export default function FilterBar({ filters, setFilters }) {
           <div style={{ padding: '8px 16px 16px', borderTop: '1px solid var(--colour-border)' }}>
             {/* Score */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-              <span style={{ fontFamily: "'Source Sans 3', system-ui, sans-serif", fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--colour-text-muted)', whiteSpace: 'nowrap' }}>Score</span>
+              <span style={{ fontFamily: "'Figtree', system-ui, sans-serif", fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--colour-text-muted)', whiteSpace: 'nowrap' }}>Score</span>
               <select value={scoreKey} onChange={e => updateFilter('scoreKey', e.target.value)} style={{ flex: 1 }}>
                 {drivers.map(d => <option key={d.key} value={d.key}>{d.shortLabel}</option>)}
               </select>
             </div>
             {/* Region */}
             <div style={{ marginBottom: 10 }}>
-              <span style={{ fontFamily: "'Source Sans 3', system-ui, sans-serif", fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--colour-text-muted)', display: 'block', marginBottom: 6 }}>Region</span>
+              <span style={{ fontFamily: "'Figtree', system-ui, sans-serif", fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--colour-text-muted)', display: 'block', marginBottom: 6 }}>Region</span>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                 <button className={`filter-btn${regions.length === 0 ? ' active' : ''}`} onClick={() => updateFilter('regions', [])}>All</button>
                 {REGIONS.map(r => (
@@ -104,7 +104,7 @@ export default function FilterBar({ filters, setFilters }) {
             </div>
             {/* Regime */}
             <div>
-              <span style={{ fontFamily: "'Source Sans 3', system-ui, sans-serif", fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--colour-text-muted)', display: 'block', marginBottom: 6 }}>Regime</span>
+              <span style={{ fontFamily: "'Figtree', system-ui, sans-serif", fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--colour-text-muted)', display: 'block', marginBottom: 6 }}>Regime</span>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                 <button className={`filter-btn${regimes.length === 0 ? ' active' : ''}`} onClick={() => updateFilter('regimes', [])}>All</button>
                 {REGIMES.map(r => (
@@ -123,7 +123,7 @@ export default function FilterBar({ filters, setFilters }) {
       id="filter-bar"
       style={{
         position: 'sticky',
-        top: 56,
+        top: 'calc(var(--header-bar-h) + 20px)',
         zIndex: 90,
         background: 'var(--colour-bg)',
         borderBottom: '1px solid var(--colour-border)',
@@ -145,7 +145,7 @@ export default function FilterBar({ filters, setFilters }) {
           {/* Score selector */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <label style={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 12,
               fontWeight: 600,
               textTransform: 'uppercase',
@@ -169,7 +169,7 @@ export default function FilterBar({ filters, setFilters }) {
           {/* Region filter */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
             <span style={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 12,
               fontWeight: 600,
               textTransform: 'uppercase',
@@ -202,7 +202,7 @@ export default function FilterBar({ filters, setFilters }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', position: 'relative' }}>
             <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
               <span style={{
-                fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                fontFamily: "'Figtree', system-ui, sans-serif",
                 fontSize: 12,
                 fontWeight: 600,
                 textTransform: 'uppercase',
@@ -223,7 +223,7 @@ export default function FilterBar({ filters, setFilters }) {
                   width: 16,
                   height: 16,
                   cursor: 'pointer',
-                  fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                  fontFamily: "'Figtree', system-ui, sans-serif",
                   fontSize: 10,
                   fontWeight: 700,
                   color: 'var(--colour-text-muted)',
@@ -253,7 +253,7 @@ export default function FilterBar({ filters, setFilters }) {
                 padding: '20px 24px',
                 width: 440,
                 boxShadow: '0 4px 24px rgba(43,76,126,0.12)',
-                fontFamily: "'Source Serif 4', Georgia, serif",
+                fontFamily: "'Figtree', system-ui, sans-serif",
               }}>
                 <div style={{
                   display: 'flex',
@@ -263,7 +263,7 @@ export default function FilterBar({ filters, setFilters }) {
                   gap: 12,
                 }}>
                   <span style={{
-                    fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                    fontFamily: "'Figtree', system-ui, sans-serif",
                     fontSize: 12,
                     fontWeight: 700,
                     textTransform: 'uppercase',
@@ -296,7 +296,7 @@ export default function FilterBar({ filters, setFilters }) {
                     }} />
                     <div>
                       <span style={{
-                        fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                        fontFamily: "'Figtree', system-ui, sans-serif",
                         fontSize: 13, fontWeight: 600, color: 'var(--colour-text)',
                       }}>
                         {item.label} —{' '}
@@ -309,7 +309,7 @@ export default function FilterBar({ filters, setFilters }) {
                 ))}
 
                 <p style={{
-                  fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                  fontFamily: "'Figtree', system-ui, sans-serif",
                   fontSize: 11,
                   color: 'var(--colour-text-light)',
                   margin: '12px 0 0',
@@ -346,7 +346,7 @@ export default function FilterBar({ filters, setFilters }) {
         {/* Right group: view tabs */}
         <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
           <span style={{
-            fontFamily: "'Source Sans 3', system-ui, sans-serif",
+            fontFamily: "'Figtree', system-ui, sans-serif",
             fontSize: 12,
             fontWeight: 600,
             textTransform: 'uppercase',

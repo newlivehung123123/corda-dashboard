@@ -1,10 +1,11 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
 import { scaleLinear } from 'd3-scale';
 import { interpolate } from 'd3-interpolate';
 import { countries as allCountries } from '../../data/countries.js';
 import { drivers } from '../../data/drivers.js';
 import CountryCard from '../CountryCard.jsx';
+import { setHoverProfile, clearHoverProfile } from '../HoverProfile.jsx';
 
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
 
@@ -32,14 +33,24 @@ const NAME_TO_ISO3 = {
 
 const countryMap = Object.fromEntries(allCountries.map(c => [c.iso3, c]));
 
-function getScoreColour(score, scoreKey) {
+// White → mango → burnt mango. Three stops rather than two so lightness keeps
+// falling across the whole range; a straight white-to-mango ramp bunches the
+// high scores together because mango itself is a light colour.
+const RAMP = [
+  { t: 0.00, rgb: [255, 255, 255] },
+  { t: 0.55, rgb: [255, 166,  43] },  // --mango
+  { t: 1.00, rgb: [140,  61,   4] },  // --mango-burnt
+];
+
+function getScoreColour(score) {
   if (score === undefined || score === null) return '#E0E0E0';
-  const t = score / 100;
-  // Interpolate from white (#FFFFFF) to CORDA navy (#2B4C7E)
-  const r = Math.round(255 + (43 - 255) * t);
-  const g = Math.round(255 + (76 - 255) * t);
-  const b = Math.round(255 + (126 - 255) * t);
-  return `rgb(${r},${g},${b})`;
+  const t = Math.max(0, Math.min(1, score / 100));
+  const i = t <= RAMP[1].t ? 0 : 1;
+  const a = RAMP[i];
+  const b = RAMP[i + 1];
+  const f = (t - a.t) / (b.t - a.t);
+  const [r, g, bl] = a.rgb.map((v, k) => Math.round(v + (b.rgb[k] - v) * f));
+  return `rgb(${r},${g},${bl})`;
 }
 
 function getCountryFromGeo(geo) {
@@ -53,8 +64,6 @@ function getCountryFromGeo(geo) {
 
 export default function MapView({ filters, setFilters, pinnedCountry, setPinnedCountry }) {
   const { scoreKey, regions, regimes } = filters;
-  const [hoveredCountry, setHoveredCountry] = useState(null);
-  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
 
   const driver = drivers.find(d => d.key === scoreKey) || drivers[0];
@@ -77,14 +86,14 @@ export default function MapView({ filters, setFilters, pinnedCountry, setPinnedC
     <section id="map" style={{ padding: '48px 0', borderTop: '1px solid var(--colour-border)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
         <div style={{ marginBottom: 20 }}>
-          <h2 style={{ margin: 0 }}>World Map</h2>
+          <h2 style={{ margin: 0, fontSize: 'clamp(24px, 2.4vw, 34px)', letterSpacing: '-0.016em' }}>World Map</h2>
           <p style={{
-            fontFamily: "'Source Serif 4', Georgia, serif",
+            fontFamily: "'Figtree', system-ui, sans-serif",
             fontSize: 15,
             color: 'var(--colour-text-muted)',
             margin: '6px 0 0',
           }}>
-            Choropleth map — darker navy = higher {driver.shortLabel} score. Grey = not in CORDA sample.
+            Choropleth map — darker mango = higher {driver.shortLabel} score. Grey = not in CORDA sample.
           </p>
         </div>
 
@@ -118,30 +127,37 @@ export default function MapView({ filters, setFilters, pinnedCountry, setPinnedC
                           ? (filtered ? getScoreColour(score) : '#D4D4D4')
                           : '#E0E0E0';
                         const isPinned = pinnedCountry && country?.iso3 === pinnedCountry.iso3;
-                        const isHovered = hoveredCountry && country?.iso3 === hoveredCountry.iso3;
 
                         return (
                           <Geography
                             key={geo.rsmKey}
                             geography={geo}
                             fill={fill}
-                            stroke={isPinned || isHovered ? '#8B6914' : '#D4D4D4'}
-                            strokeWidth={isPinned || isHovered ? 1.5 : 0.5}
+                            stroke={isPinned ? '#22252C' : '#D4D4D4'}
+                            strokeWidth={isPinned ? 1.6 : 0.5}
+                            // The hovered outline used to come from component
+                            // state, which redrew all 177 landmasses on every
+                            // pointer move. Each shape tracks its own hover
+                            // instead, so only the one under the cursor redraws.
                             style={{
                               default: { outline: 'none', transition: 'fill 0.2s' },
-                              hover: { outline: 'none', fill: country ? '#8B6914' : fill, cursor: country ? 'pointer' : 'default' },
+                              hover: {
+                                outline: 'none',
+                                fill: country ? '#22252C' : fill,
+                                stroke: country ? '#22252C' : '#D4D4D4',
+                                strokeWidth: country ? 1.6 : 0.5,
+                                cursor: country ? 'pointer' : 'default',
+                              },
                               pressed: { outline: 'none' },
                             }}
                             onMouseEnter={(e) => {
-                              if (country) {
-                                setHoveredCountry(country);
-                                setTooltipPos({ x: e.clientX, y: e.clientY });
-                              }
+                              if (country) setHoverProfile(country, e.clientX, e.clientY);
                             }}
                             onMouseMove={(e) => {
-                              setTooltipPos({ x: e.clientX, y: e.clientY });
+                              if (country) setHoverProfile(country, e.clientX, e.clientY);
+                              else clearHoverProfile();
                             }}
-                            onMouseLeave={() => setHoveredCountry(null)}
+                            onMouseLeave={clearHoverProfile}
                             onClick={() => {
                               if (country) {
                                 setPinnedCountry(prev => prev?.iso3 === country.iso3 ? null : country);
@@ -166,7 +182,7 @@ export default function MapView({ filters, setFilters, pinnedCountry, setPinnedC
             {/* Legend */}
             <div style={{ marginTop: 16, display: 'flex', alignItems: 'center', gap: 12 }}>
               <span style={{
-                fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                fontFamily: "'Figtree', system-ui, sans-serif",
                 fontSize: 11,
                 color: 'var(--colour-text-muted)',
                 whiteSpace: 'nowrap',
@@ -177,7 +193,7 @@ export default function MapView({ filters, setFilters, pinnedCountry, setPinnedC
                 flex: 1,
                 height: 14,
                 borderRadius: 7,
-                background: 'linear-gradient(to right, #FFFFFF, #2B4C7E)',
+                background: 'linear-gradient(to right, #FFFFFF 0%, #FFA62B 55%, #8C3D04 100%)',
                 border: '1px solid var(--colour-border)',
                 position: 'relative',
               }}>
@@ -188,7 +204,7 @@ export default function MapView({ filters, setFilters, pinnedCountry, setPinnedC
                     top: '100%',
                     transform: 'translateX(-50%)',
                     marginTop: 3,
-                    fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                    fontFamily: "'Figtree', system-ui, sans-serif",
                     fontSize: 10,
                     color: 'var(--colour-text-muted)',
                   }}>
@@ -197,7 +213,7 @@ export default function MapView({ filters, setFilters, pinnedCountry, setPinnedC
                 ))}
               </div>
               <span style={{
-                fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                fontFamily: "'Figtree', system-ui, sans-serif",
                 fontSize: 11,
                 color: 'var(--colour-text-muted)',
                 whiteSpace: 'nowrap',
@@ -206,40 +222,9 @@ export default function MapView({ filters, setFilters, pinnedCountry, setPinnedC
               </span>
             </div>
 
-            {/* Hover tooltip */}
-            {hoveredCountry && !pinnedCountry && (
-              <div style={{
-                position: 'fixed',
-                left: tooltipPos.x + 16,
-                top: tooltipPos.y - 10,
-                zIndex: 300,
-                pointerEvents: 'none',
-              }}>
-                <div style={{
-                  background: 'var(--colour-bg-card)',
-                  border: '1px solid var(--colour-border-strong)',
-                  borderRadius: 4,
-                  padding: '6px 10px',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                }}>
-                  <div style={{
-                    fontFamily: "'Source Sans 3', system-ui, sans-serif",
-                    fontSize: 13,
-                    fontWeight: 600,
-                    color: 'var(--colour-text)',
-                  }}>
-                    {hoveredCountry.name}
-                  </div>
-                  <div style={{
-                    fontFamily: "'Source Sans 3', system-ui, sans-serif",
-                    fontSize: 12,
-                    color: 'var(--colour-text-muted)',
-                  }}>
-                    {driver.shortLabel}: <strong>{hoveredCountry[scoreKey].toFixed(1)}</strong>
-                  </div>
-                </div>
-              </div>
-            )}
+            {/* Hovering a country now opens its full profile, drawn once at
+                the app level from a store this map only writes to, in place of
+                the name-and-score chip that used to sit here. */}
           </div>
 
           {/* Pinned country card — desktop side panel only */}

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import {
   ScatterChart, Scatter, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, ReferenceLine, Label,
@@ -6,6 +6,7 @@ import {
 import { countries as allCountries } from '../../data/countries.js';
 import { drivers } from '../../data/drivers.js';
 import CountryCard from '../CountryCard.jsx';
+import { setHoverProfile, clearHoverProfile } from '../HoverProfile.jsx';
 
 const REGIME_COLOURS = {
   'Liberal Democracy': '#2B4C7E',
@@ -62,7 +63,7 @@ function CustomDot({ cx, cy, payload, colorBy, scoreKey, isHighlighted, isFilter
         <text
           x={cx + 13}
           y={cy + 4}
-          fontFamily="'Source Sans 3', system-ui, sans-serif"
+          fontFamily="'Figtree', system-ui, sans-serif"
           fontSize={10}
           fontWeight={600}
           fill="#1A1A1A"
@@ -74,20 +75,33 @@ function CustomDot({ cx, cy, payload, colorBy, scoreKey, isHighlighted, isFilter
   );
 }
 
-function CustomTooltipContent({ active, payload, onHover }) {
+/**
+ * A scatter plot has no shared axis to hover along, and the dots are only 8px
+ * across, so recharts' own nearest-point search is what makes the chart
+ * comfortable to use. These two module-level values let that search and the
+ * cursor position meet without either being held in component state, which is
+ * what used to force the whole plot to re-render on every pointer move.
+ *
+ * The tooltip reports which country is nearest whenever that changes; the
+ * chart reports where the cursor is as it moves. Each publishes using the
+ * other's latest value, so the card both appears near the point and follows
+ * the pointer while it stays there.
+ */
+let pointer = { x: 0, y: 0 };
+let nearest = null;
+
+function TooltipBridge({ active, payload }) {
+  const country = active && payload?.length ? payload[0].payload : null;
   React.useEffect(() => {
-    if (active && payload?.length) {
-      onHover(payload[0]?.payload || null);
-    } else {
-      onHover(null);
-    }
-  }, [active, payload, onHover]);
+    nearest = country;
+    if (country) setHoverProfile(country, pointer.x, pointer.y);
+    else clearHoverProfile();
+  }, [country]);
   return null;
 }
 
 export default function ScatterView({ filters, setFilters, pinnedCountry, setPinnedCountry }) {
   const { regions, regimes, highlightCountries, colorBy, scatterX, scatterY } = filters;
-  const [hoveredCountry, setHoveredCountry] = useState(null);
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
 
   const localColorBy = colorBy;
@@ -106,8 +120,6 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
     x: c[xKey],
     y: c[yKey],
   }));
-
-  const handleHover = useCallback((c) => setHoveredCountry(c || null), []);
 
   const handleClick = (data) => {
     if (!data?.activePayload?.length) return;
@@ -133,9 +145,9 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
     <section id="scatter" style={{ padding: '48px 0', borderTop: '1px solid var(--colour-border)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
         <div style={{ marginBottom: 20 }}>
-          <h2 style={{ margin: 0 }}>Two-Axis Scatter Plot</h2>
+          <h2 style={{ margin: 0, fontSize: 'clamp(24px, 2.4vw, 34px)', letterSpacing: '-0.016em' }}>Two-Axis Scatter Plot</h2>
           <p style={{
-            fontFamily: "'Source Serif 4', Georgia, serif",
+            fontFamily: "'Figtree', system-ui, sans-serif",
             fontSize: 15,
             color: 'var(--colour-text-muted)',
             margin: '6px 0 0',
@@ -148,7 +160,7 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, marginBottom: 20, alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <label style={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 12, fontWeight: 600, textTransform: 'uppercase',
               letterSpacing: '0.06em', color: 'var(--colour-text-muted)',
             }}>
@@ -165,7 +177,7 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <label style={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 12, fontWeight: 600, textTransform: 'uppercase',
               letterSpacing: '0.06em', color: 'var(--colour-text-muted)',
             }}>
@@ -182,7 +194,7 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <label style={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 12, fontWeight: 600, textTransform: 'uppercase',
               letterSpacing: '0.06em', color: 'var(--colour-text-muted)',
             }}>
@@ -211,6 +223,14 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
               <ScatterChart
                 margin={{ top: 20, right: 30, bottom: 40, left: 40 }}
                 onClick={handleClick}
+                onMouseMove={(state, event) => {
+                  if (isMobile) return;
+                  const e = event?.nativeEvent || event;
+                  if (!e) return;
+                  pointer = { x: e.clientX, y: e.clientY };
+                  if (nearest) setHoverProfile(nearest, pointer.x, pointer.y);
+                }}
+                onMouseLeave={() => { nearest = null; clearHoverProfile(); }}
               >
                 <CartesianGrid stroke="#D4D4D4" strokeDasharray="3 3" />
                 <XAxis
@@ -219,7 +239,7 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
                   domain={[0, 100]}
                   name={xDriver?.shortLabel}
                   tick={{
-                    fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                    fontFamily: "'Figtree', system-ui, sans-serif",
                     fontSize: 11,
                     fill: '#5A5448',
                   }}
@@ -231,7 +251,7 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
                     position="insideBottom"
                     offset={-15}
                     style={{
-                      fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                      fontFamily: "'Figtree', system-ui, sans-serif",
                       fontSize: 12,
                       fontWeight: 600,
                       fill: '#5A5448',
@@ -244,7 +264,7 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
                   domain={[0, 100]}
                   name={yDriver?.shortLabel}
                   tick={{
-                    fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                    fontFamily: "'Figtree', system-ui, sans-serif",
                     fontSize: 11,
                     fill: '#5A5448',
                   }}
@@ -257,7 +277,7 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
                     position="insideLeft"
                     offset={10}
                     style={{
-                      fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                      fontFamily: "'Figtree', system-ui, sans-serif",
                       fontSize: 12,
                       fontWeight: 600,
                       fill: '#5A5448',
@@ -279,10 +299,7 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
                   strokeWidth={1}
                 />
 
-                <Tooltip
-                  content={<CustomTooltipContent onHover={handleHover} />}
-                  cursor={{ strokeDasharray: '3 3' }}
-                />
+                <Tooltip content={<TooltipBridge />} cursor={{ strokeDasharray: '3 3' }} />
 
                 <Scatter
                   data={data}
@@ -319,18 +336,8 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
           )}
         </div>
 
-        {/* Tooltip hover card */}
-        {hoveredCountry && !pinnedCountry && (
-          <div style={{
-            position: 'fixed',
-            right: 40,
-            bottom: 80,
-            zIndex: 300,
-            pointerEvents: 'none',
-          }}>
-            <CountryCard country={hoveredCountry} mode="tooltip" onViewProfile={handleViewProfile} />
-          </div>
-        )}
+        {/* The hover profile is drawn once at the app level, from a store this
+            chart only writes to. */}
 
         {/* Legend */}
         <div style={{
@@ -345,7 +352,7 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
             <div key={k} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <div style={{ width: 10, height: 10, borderRadius: '50%', background: v }} />
               <span style={{
-                fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                fontFamily: "'Figtree', system-ui, sans-serif",
                 fontSize: 12,
                 color: 'var(--colour-text-muted)',
               }}>{k}</span>
@@ -355,7 +362,7 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
             <div key={k} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <div style={{ width: 10, height: 10, borderRadius: '50%', background: v }} />
               <span style={{
-                fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                fontFamily: "'Figtree', system-ui, sans-serif",
                 fontSize: 12,
                 color: 'var(--colour-text-muted)',
               }}>{k}</span>

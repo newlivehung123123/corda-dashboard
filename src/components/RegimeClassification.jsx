@@ -5,16 +5,14 @@ export default function RegimeClassification() {
   return (
     <section
       id="regime-classification"
-      style={{
-        borderTop: '1px solid var(--colour-border)',
-        background: 'var(--colour-bg)',
-      }}
+      style={{ background: 'var(--mango-pale)' }}
     >
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '64px 24px' }}>
-        <h2 style={{ fontSize: 32, marginBottom: 28 }}>Regime Type Classification</h2>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(56px, 6.5vw, 92px) 24px' }}>
+        <p className="eyebrow">Taxonomy</p>
+        <h2 style={{ margin: '0 0 28px' }}>Regime Type Classification</h2>
 
         <p style={{
-          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontFamily: "'Figtree', system-ui, sans-serif",
           fontSize: 15,
           color: 'var(--colour-text)',
           lineHeight: 1.75,
@@ -65,20 +63,20 @@ export default function RegimeClassification() {
               }} />
               <div>
                 <div style={{
-                  fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                  fontFamily: "'Figtree', system-ui, sans-serif",
                   fontSize: 14, fontWeight: 700, color: 'var(--colour-text)', marginBottom: 4,
                 }}>
                   {item.label}
                 </div>
                 <p style={{
-                  fontFamily: "'Source Serif 4', Georgia, serif",
+                  fontFamily: "'Figtree', system-ui, sans-serif",
                   fontSize: 14, color: 'var(--colour-text)', lineHeight: 1.7, margin: '0 0 6px',
                 }}>
                   {item.definition}
                 </p>
                 {item.note && (
                   <p style={{
-                    fontFamily: "'Source Serif 4', Georgia, serif",
+                    fontFamily: "'Figtree', system-ui, sans-serif",
                     fontSize: 13, color: 'var(--colour-text-muted)',
                     fontStyle: 'italic', lineHeight: 1.65, margin: '0 0 6px',
                   }}>
@@ -86,7 +84,7 @@ export default function RegimeClassification() {
                   </p>
                 )}
                 <p style={{
-                  fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                  fontFamily: "'Figtree', system-ui, sans-serif",
                   fontSize: 12, color: 'var(--colour-text-light)', margin: 0,
                 }}>
                   In this index: {item.countries}
@@ -96,7 +94,7 @@ export default function RegimeClassification() {
           ))}
         </div>
         <p style={{
-          fontFamily: "'Source Sans 3', system-ui, sans-serif",
+          fontFamily: "'Figtree', system-ui, sans-serif",
           fontSize: 12, color: 'var(--colour-text-light)',
           marginTop: 12, lineHeight: 1.5, maxWidth: 900,
         }}>
@@ -108,7 +106,7 @@ export default function RegimeClassification() {
 
         {/* Data limitations callout */}
         <div className="callout" style={{ maxWidth: 900, marginTop: 32 }}>
-          <strong style={{ fontFamily: "'Source Sans 3', system-ui, sans-serif", fontSize: 13 }}>
+          <strong style={{ fontFamily: "'Figtree', system-ui, sans-serif", fontSize: 13 }}>
             Data Limitations — Three items apply to this edition:
           </strong>
           <ol>

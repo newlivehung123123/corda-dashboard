@@ -58,7 +58,7 @@ export default function DriverPanel({ activeDriver, onSelectDriver }) {
               flexShrink: 0,
             }} />
             <span style={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 13,
               fontWeight: activeDriver === d.key ? 600 : 400,
               color: activeDriver === d.key ? 'var(--colour-text)' : 'var(--colour-text-muted)',
@@ -87,7 +87,7 @@ export default function DriverPanel({ activeDriver, onSelectDriver }) {
             background: DRIVER_COLOURS_HEX[selected.key],
           }} />
           <span style={{
-            fontFamily: "'Playfair Display', Georgia, serif",
+            fontFamily: "'Figtree', system-ui, sans-serif",
             fontWeight: 700,
             fontSize: 14,
             color: 'var(--colour-text)',
@@ -97,7 +97,7 @@ export default function DriverPanel({ activeDriver, onSelectDriver }) {
         </div>
 
         <p style={{
-          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontFamily: "'Figtree', system-ui, sans-serif",
           fontSize: 13,
           color: 'var(--colour-text-muted)',
           lineHeight: 1.6,
@@ -108,7 +108,7 @@ export default function DriverPanel({ activeDriver, onSelectDriver }) {
 
         <div style={{ display: 'flex', gap: 12 }}>
           <div style={{
-            fontFamily: "'Source Sans 3', system-ui, sans-serif",
+            fontFamily: "'Figtree', system-ui, sans-serif",
             fontSize: 12,
             color: 'var(--colour-text-muted)',
           }}>
@@ -120,7 +120,7 @@ export default function DriverPanel({ activeDriver, onSelectDriver }) {
           {selected.nAI !== undefined && (
             <>
               <div style={{
-                fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                fontFamily: "'Figtree', system-ui, sans-serif",
                 fontSize: 12,
                 color: 'var(--colour-text-muted)',
               }}>
@@ -130,7 +130,7 @@ export default function DriverPanel({ activeDriver, onSelectDriver }) {
                 AI-specific
               </div>
               <div style={{
-                fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                fontFamily: "'Figtree', system-ui, sans-serif",
                 fontSize: 12,
                 color: 'var(--colour-text-muted)',
               }}>
@@ -146,7 +146,7 @@ export default function DriverPanel({ activeDriver, onSelectDriver }) {
         {selected.theoryBasis && (
           <div style={{ marginTop: 12 }}>
             <div style={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 11,
               fontWeight: 600,
               textTransform: 'uppercase',
@@ -157,7 +157,7 @@ export default function DriverPanel({ activeDriver, onSelectDriver }) {
               Theory
             </div>
             <div style={{
-              fontFamily: "'Source Serif 4', Georgia, serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 12,
               color: 'var(--colour-text-muted)',
               fontStyle: 'italic',

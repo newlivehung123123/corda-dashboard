@@ -50,7 +50,7 @@ export default function Methodology() {
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '64px 24px' }}>
         <h2 style={{ fontSize: 32, marginBottom: 8 }}>Methodology</h2>
         <p style={{
-          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontFamily: "'Figtree', system-ui, sans-serif",
           fontSize: 16,
           color: 'var(--colour-text-muted)',
           marginBottom: 40,
@@ -70,7 +70,7 @@ export default function Methodology() {
           <div style={{ marginBottom: 32 }}>
             <h4 style={{ fontSize: 16, marginBottom: 10 }}>Theoretical Framework</h4>
             <p style={{
-              fontFamily: "'Source Serif 4', Georgia, serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 15,
               color: 'var(--colour-text)',
               lineHeight: 1.7,
@@ -96,7 +96,7 @@ export default function Methodology() {
                     <tr key={row.code}>
                       <td>
                         <span style={{
-                          fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                          fontFamily: "'Figtree', system-ui, sans-serif",
                           fontSize: 12,
                           fontWeight: 700,
                           background: 'var(--colour-bg-overlay)',
@@ -135,7 +135,7 @@ export default function Methodology() {
                   }}>
                     {step.bullets.map((bullet, i) => (
                       <li key={i} style={{
-                        fontFamily: "'Source Serif 4', Georgia, serif",
+                        fontFamily: "'Figtree', system-ui, sans-serif",
                         fontSize: 15,
                         color: 'var(--colour-text)',
                         lineHeight: 1.75,
@@ -166,13 +166,13 @@ export default function Methodology() {
                   {dataSources.map(row => (
                     <tr key={row.source}>
                       <td style={{ fontWeight: 500, fontSize: 14 }}>{row.source}</td>
-                      <td style={{ textAlign: 'center', fontFamily: "'Source Sans 3', system-ui, sans-serif", fontSize: 13 }}>
+                      <td style={{ textAlign: 'center', fontFamily: "'Figtree', system-ui, sans-serif", fontSize: 13 }}>
                         {row.indicators}
                       </td>
-                      <td style={{ fontFamily: "'Source Sans 3', system-ui, sans-serif", fontSize: 13, color: 'var(--colour-text-muted)' }}>
+                      <td style={{ fontFamily: "'Figtree', system-ui, sans-serif", fontSize: 13, color: 'var(--colour-text-muted)' }}>
                         {row.yearRange}
                       </td>
-                      <td style={{ textAlign: 'center', fontFamily: "'Source Sans 3', system-ui, sans-serif", fontSize: 13, color: 'var(--colour-text-muted)' }}>
+                      <td style={{ textAlign: 'center', fontFamily: "'Figtree', system-ui, sans-serif", fontSize: 13, color: 'var(--colour-text-muted)' }}>
                         {row.countries}
                       </td>
                     </tr>
@@ -186,7 +186,7 @@ export default function Methodology() {
           <div style={{ marginBottom: 32 }}>
             <h4 style={{ fontSize: 16, marginBottom: 14 }}>Regime Type Classification</h4>
             <p style={{
-              fontFamily: "'Source Serif 4', Georgia, serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 15,
               color: 'var(--colour-text)',
               lineHeight: 1.75,
@@ -236,20 +236,20 @@ export default function Methodology() {
                   }} />
                   <div>
                     <div style={{
-                      fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                      fontFamily: "'Figtree', system-ui, sans-serif",
                       fontSize: 14, fontWeight: 700, color: 'var(--colour-text)', marginBottom: 4,
                     }}>
                       {item.label}
                     </div>
                     <p style={{
-                      fontFamily: "'Source Serif 4', Georgia, serif",
+                      fontFamily: "'Figtree', system-ui, sans-serif",
                       fontSize: 14, color: 'var(--colour-text)', lineHeight: 1.7, margin: '0 0 6px',
                     }}>
                       {item.definition}
                     </p>
                     {item.note && (
                       <p style={{
-                        fontFamily: "'Source Serif 4', Georgia, serif",
+                        fontFamily: "'Figtree', system-ui, sans-serif",
                         fontSize: 13, color: 'var(--colour-text-muted)',
                         fontStyle: 'italic', lineHeight: 1.65, margin: '0 0 6px',
                       }}>
@@ -257,7 +257,7 @@ export default function Methodology() {
                       </p>
                     )}
                     <p style={{
-                      fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                      fontFamily: "'Figtree', system-ui, sans-serif",
                       fontSize: 12, color: 'var(--colour-text-light)', margin: 0,
                     }}>
                       In this index: {item.countries}
@@ -267,7 +267,7 @@ export default function Methodology() {
               ))}
             </div>
             <p style={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 12, color: 'var(--colour-text-light)',
               marginTop: 12, lineHeight: 1.5,
             }}>
@@ -280,7 +280,7 @@ export default function Methodology() {
 
           {/* Data limitations callout */}
           <div className="callout">
-            <strong style={{ fontFamily: "'Source Sans 3', system-ui, sans-serif", fontSize: 13 }}>
+            <strong style={{ fontFamily: "'Figtree', system-ui, sans-serif", fontSize: 13 }}>
               Data Limitations — Three items apply to this edition:
             </strong>
             <ol>
@@ -297,7 +297,7 @@ export default function Methodology() {
             B — Analytical Methods
           </h3>
           <p style={{
-            fontFamily: "'Source Serif 4', Georgia, serif",
+            fontFamily: "'Figtree', system-ui, sans-serif",
             fontSize: 15,
             color: 'var(--colour-text-muted)',
             marginBottom: 20,
@@ -317,7 +317,7 @@ export default function Methodology() {
                 }}>
                   {method.bullets.map((bullet, i) => (
                     <li key={i} style={{
-                      fontFamily: "'Source Serif 4', Georgia, serif",
+                      fontFamily: "'Figtree', system-ui, sans-serif",
                       fontSize: 15,
                       color: 'var(--colour-text)',
                       lineHeight: 1.75,

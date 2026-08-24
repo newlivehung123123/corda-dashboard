@@ -9,16 +9,22 @@ const paragraphs = [
 
 export default function MissionVision() {
   return (
-    <section id="mission-vision" style={{ padding: '48px 0', borderTop: '1px solid var(--colour-border)' }}>
-      <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 24px' }}>
-        <h2 style={{ margin: '0 0 24px' }}>Mission &amp; Vision</h2>
+    <section
+      id="mission-vision"
+      style={{ background: 'var(--mango-pale)', padding: 'clamp(56px, 6.5vw, 92px) 24px' }}
+    >
+      <div style={{ maxWidth: 900, margin: '0 auto' }}>
+        <p className="eyebrow">Why this index exists</p>
+        <h2 style={{ margin: '0 0 28px' }}>Mission &amp; Vision</h2>
         {paragraphs.map((p, i) => (
           <p key={i} style={{
-            fontFamily: "'Source Serif 4', Georgia, serif",
-            fontSize: 16,
-            lineHeight: 1.7,
-            color: 'var(--colour-text)',
-            marginBottom: 18,
+            fontFamily: "'Figtree', system-ui, sans-serif",
+            fontSize: i === 0 ? 'clamp(18px, 1.7vw, 22px)' : 17,
+            fontWeight: i === 0 ? 500 : 400,
+            lineHeight: i === 0 ? 1.5 : 1.72,
+            letterSpacing: i === 0 ? '-0.012em' : 0,
+            color: i === 0 ? 'var(--mango-ink)' : 'var(--colour-text)',
+            marginBottom: i === 0 ? 26 : 20,
           }}>
             {p}
           </p>

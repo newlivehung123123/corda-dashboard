@@ -59,7 +59,7 @@ function SingleRadar({ country, showMean = true, fillColour = '#2B4C7E', opacity
       boxShadow: '0 2px 8px var(--colour-shadow)',
     }}>
       <div style={{
-        fontFamily: "'Playfair Display', Georgia, serif",
+        fontFamily: "'Figtree', system-ui, sans-serif",
         fontWeight: 700,
         fontSize: 14,
         color: 'var(--colour-text)',
@@ -69,7 +69,7 @@ function SingleRadar({ country, showMean = true, fillColour = '#2B4C7E', opacity
         {country.name}
       </div>
       <div style={{
-        fontFamily: "'Source Sans 3', system-ui, sans-serif",
+        fontFamily: "'Figtree', system-ui, sans-serif",
         fontSize: 11,
         color: 'var(--colour-text-muted)',
         textAlign: 'center',
@@ -84,7 +84,7 @@ function SingleRadar({ country, showMean = true, fillColour = '#2B4C7E', opacity
           <PolarAngleAxis
             dataKey="subject"
             tick={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 10,
               fill: '#5A5448',
             }}
@@ -118,7 +118,7 @@ function SingleRadar({ country, showMean = true, fillColour = '#2B4C7E', opacity
           <Tooltip
             formatter={(value, name) => [`${value.toFixed(1)}`, name]}
             contentStyle={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 12,
               background: 'var(--colour-bg-card)',
               border: '1px solid var(--colour-border)',
@@ -167,7 +167,7 @@ function DefaultOverlayRadar() {
     }}>
       <h3 style={{ marginBottom: 4, fontSize: 16 }}>Reference Comparison</h3>
       <p style={{
-        fontFamily: "'Source Serif 4', Georgia, serif",
+        fontFamily: "'Figtree', system-ui, sans-serif",
         fontSize: 13,
         color: 'var(--colour-text-muted)',
         marginBottom: 16,
@@ -181,7 +181,7 @@ function DefaultOverlayRadar() {
           <PolarAngleAxis
             dataKey="subject"
             tick={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 11,
               fill: '#5A5448',
             }}
@@ -223,14 +223,14 @@ function DefaultOverlayRadar() {
           <Legend
             iconType="circle"
             wrapperStyle={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 12,
             }}
           />
           <Tooltip
             formatter={(value, name) => [`${value.toFixed(1)}`, name]}
             contentStyle={{
-              fontFamily: "'Source Sans 3', system-ui, sans-serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 12,
               background: 'var(--colour-bg-card)',
               border: '1px solid var(--colour-border)',
@@ -271,9 +271,9 @@ export default function RadarView({ filters, setFilters, pinnedCountry, setPinne
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24, flexWrap: 'wrap', gap: 12 }}>
           <div>
-            <h2 style={{ margin: 0 }}>Driver Profiles — Radar Chart</h2>
+            <h2 style={{ margin: 0, fontSize: 'clamp(24px, 2.4vw, 34px)', letterSpacing: '-0.016em' }}>Driver Profiles — Radar Chart</h2>
             <p style={{
-              fontFamily: "'Source Serif 4', Georgia, serif",
+              fontFamily: "'Figtree', system-ui, sans-serif",
               fontSize: 15,
               color: 'var(--colour-text-muted)',
               margin: '6px 0 0',
@@ -291,7 +291,7 @@ export default function RadarView({ filters, setFilters, pinnedCountry, setPinne
               onChange={e => setSearchVal(e.target.value)}
               aria-label="Search country for radar chart"
               style={{
-                fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                fontFamily: "'Figtree', system-ui, sans-serif",
                 fontSize: 13,
                 border: '1px solid var(--colour-border)',
                 borderRadius: 6,
@@ -346,7 +346,7 @@ export default function RadarView({ filters, setFilters, pinnedCountry, setPinne
                 padding: '4px 10px 4px 12px',
               }}>
                 <span style={{
-                  fontFamily: "'Source Sans 3', system-ui, sans-serif",
+                  fontFamily: "'Figtree', system-ui, sans-serif",
                   fontSize: 12,
                   fontWeight: 600,
                 }}>

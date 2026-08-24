@@ -1,25 +1,41 @@
 :root {
+  /* ── Brand palette — mango ─────────────────────────────────────────────
+     Anchored on #FFA62B, with the four paint-chip tones stepping around it
+     and a burnt tone dark enough to carry text on white. Charcoal is the
+     ground the mango sits on, as in the palette card itself.              */
+  --mango:        #FFA62B;  /* MANGO — the primary brand colour           */
+  --mango-light:  #F7C87A;  /* Mango Margarita                            */
+  --mango-mid:    #F5AE5F;  /* Mango Punch                                */
+  --mango-ripe:   #F0994A;  /* Ripe Mango                                 */
+  --mango-deep:   #E8862A;  /* Mango Madness                              */
+  --mango-burnt:  #8C3D04;  /* darkest ramp stop, map + deep scrims       */
+  --mango-ink:    #A2540D;  /* accent text on light grounds (5.5:1)       */
+  --mango-pale:   #FFF4E4;  /* pale band behind section intros            */
+
+  --ink:          #22252C;  /* charcoal ground — header, bands, strokes   */
+  --ink-deep:     #16181D;  /* footer ground                              */
+
   /* Background */
   --colour-bg:          #FFFFFF;
-  --colour-bg-card:     #F5F5F5;
-  --colour-bg-overlay:  #EAEAEA;
+  --colour-bg-card:     #F7F6F4;
+  --colour-bg-overlay:  #FFF4E4;
 
   /* Text */
-  --colour-text:        #1A1A1A;
-  --colour-text-muted:  #5A5448;
-  --colour-text-light:  #8C8375;
+  --colour-text:        #22252C;
+  --colour-text-muted:  #5F6169;
+  --colour-text-light:  #8D8F97;
 
   /* Brand / accent */
-  --colour-accent:      #2B4C7E;
-  --colour-accent-2:    #8B6914;
+  --colour-accent:      #A2540D;
+  --colour-accent-2:    #FFA62B;
 
-  /* Driver colours */
+  /* Driver colours — categorical data encoding, kept stable across the redesign */
   --colour-d1:          #4E79A7;
   --colour-d2:          #F28E2B;
   --colour-d3:          #E15759;
   --colour-d4:          #76B7B2;
   --colour-d5:          #59A14F;
-  --colour-composite:   #2B4C7E;
+  --colour-composite:   #B45F0F;
 
   /* Regime type colours */
   --colour-liberal:     #2B4C7E;
@@ -30,11 +46,15 @@
   /* UI */
   --colour-border:        rgba(0, 0, 0, 0.10);
   --colour-border-strong: rgba(0, 0, 0, 0.18);
-  --colour-shadow:        rgba(0, 0, 0, 0.04);
+  --colour-shadow:        rgba(0, 0, 0, 0.06);
 
   /* Region colours */
   --colour-region-europe: #4E79A7;
   --colour-region-asia: #59A14F;
   --colour-region-americas: #F28E2B;
   --colour-region-mea: #E15759;
+
+  /* Layout */
+  --header-bar-h: 48px;
+  --header-pill-h: 56px;
 }
