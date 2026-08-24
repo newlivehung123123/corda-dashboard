@@ -13,7 +13,7 @@ export default function MissionVision() {
       id="mission-vision"
       style={{ background: 'var(--mango-pale)', padding: 'clamp(56px, 6.5vw, 92px) 24px' }}
     >
-      <div style={{ maxWidth: 900, margin: '0 auto' }}>
+      <div style={{ maxWidth: 'var(--measure)', margin: '0 auto' }}>
         <p className="eyebrow">Why this index exists</p>
         <h2 style={{ margin: '0 0 28px' }}>Mission &amp; Vision</h2>
         {paragraphs.map((p, i) => (

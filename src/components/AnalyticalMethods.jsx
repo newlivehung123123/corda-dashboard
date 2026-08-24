@@ -40,20 +40,20 @@ export default function AnalyticalMethods() {
         background: 'var(--colour-bg)',
       }}
     >
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(56px, 6.5vw, 92px) 24px' }}>
+      <div style={{ maxWidth: 'var(--shell)', margin: '0 auto', padding: 'clamp(56px, 6.5vw, 92px) 24px' }}>
         <p className="eyebrow">Research design</p>
         <h2 style={{ margin: '0 0 8px' }}>Analytical Methods</h2>
         <p style={{
           fontFamily: "'Figtree', system-ui, sans-serif",
-          fontSize: 15,
+          fontSize: 'var(--fs-note)',
           color: 'var(--colour-text-muted)',
           marginBottom: 28,
           lineHeight: 1.7,
-          maxWidth: 900,
+          maxWidth: 'var(--prose)',
         }}>
           Five quantitative methods are specified for the research paper. Method 5 is research-paper only and not visualised in this dashboard.
         </p>
-        <div style={{ maxWidth: 900 }}>
+        <div style={{ maxWidth: 'var(--prose)' }}>
           {analyticalMethods.map(method => (
             <Accordion key={method.id} title={method.title}>
               <ul style={{
@@ -66,7 +66,7 @@ export default function AnalyticalMethods() {
                 {method.bullets.map((bullet, i) => (
                   <li key={i} style={{
                     fontFamily: "'Figtree', system-ui, sans-serif",
-                    fontSize: 15,
+                    fontSize: 'var(--fs-note)',
                     color: 'var(--colour-text)',
                     lineHeight: 1.75,
                   }}>

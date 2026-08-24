@@ -28,9 +28,9 @@ export default function ResourceLinks() {
         padding: 'clamp(52px, 6vw, 84px) 24px',
       }}
     >
-      <div style={{ maxWidth: 1120, margin: '0 auto' }}>
+      <div style={{ maxWidth: 'var(--shell)', margin: '0 auto' }}>
         <p className="eyebrow" style={{ color: '#6E3606' }}>Downloads</p>
-        <h2 style={{ color: 'var(--ink)', margin: '0 0 34px', maxWidth: 760 }}>
+        <h2 style={{ color: 'var(--ink)', margin: '0 0 34px', maxWidth: 'var(--measure)' }}>
           Take the 2025 edition with you
         </h2>
 

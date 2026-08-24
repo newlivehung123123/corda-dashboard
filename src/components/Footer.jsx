@@ -27,7 +27,7 @@ const item = { fontSize: 14, color: 'rgba(255,255,255,0.78)', lineHeight: 1.9 };
 export default function Footer({ onNavigate }) {
   return (
     <footer style={{ background: 'var(--ink-deep)', padding: 'clamp(48px, 5.5vw, 72px) 24px 30px' }}>
-      <div className="foot-grid" style={{ maxWidth: 1200, margin: '0 auto' }}>
+      <div className="foot-grid" style={{ maxWidth: 'var(--shell)', margin: '0 auto' }}>
         <div>
           <div style={{
             fontFamily: "'Figtree', system-ui, sans-serif",
@@ -96,7 +96,7 @@ export default function Footer({ onNavigate }) {
       </div>
 
       <div style={{
-        maxWidth: 1200,
+        maxWidth: 'var(--shell)',
         margin: '40px auto 0',
         paddingTop: 20,
         borderTop: '1px solid rgba(255,255,255,0.18)',

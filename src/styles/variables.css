@@ -57,4 +57,47 @@
   /* Layout */
   --header-bar-h: 48px;
   --header-pill-h: 56px;
+
+  /* ── Widths ───────────────────────────────────────────────────────────
+     Every section used to stop at a flat 1200px, so on a wide display the
+     whole page sat as one narrow column with several hundred pixels of
+     dead gutter either side. These three widths keep growing with the
+     viewport instead, and only stop once the line would be too long to
+     read comfortably.
+
+     --shell    the outer container: charts, the map, the filter bar
+     --measure  headings and anything that wants a generous line
+     --prose    running body copy, held to a readable line length
+
+     Each is floored at the width it used to be fixed at, so narrow and
+     mid-size screens are left exactly as they were and only the extra
+     room on a large display gets used.                                  */
+  --shell:   clamp(1200px, 93vw, 1680px);
+  --measure: clamp(940px,  74vw, 1320px);
+  --prose:   clamp(860px,  60vw, 1060px);
+
+  /* ── Fluid type ───────────────────────────────────────────────────────
+     Sizes that are set inline, where a stylesheet media query cannot
+     reach them. Reading them from variables puts them back under the
+     breakpoint below.                                                    */
+  --fs-lead: clamp(19px, 2vw, 26px);   /* hero standfirst                */
+  --fs-body: clamp(16px, 1.4vw, 18px); /* section introductions          */
+  --fs-h2s:  clamp(24px, 2.4vw, 34px); /* headings inside the data views */
+  --fs-sub:  16px;                     /* sub-headings in long sections  */
+  --fs-note: 15px;                     /* captions and running detail    */
+}
+
+/* Each size above tops out below 1440px. Past that the viewport keeps
+   growing and the type does not, which is what left the page looking
+   small and stranded in the middle of a wide screen. These resume the
+   scale from where the ceilings left it, so nothing moves at or below
+   1440px. */
+@media (min-width: 1441px) {
+  :root {
+    --fs-lead: clamp(26px, 1.75vw, 34px);
+    --fs-body: clamp(18px, 1.15vw, 23px);
+    --fs-h2s:  clamp(34px, 2.2vw, 46px);
+    --fs-sub:  clamp(16px, 1.1vw, 22px);
+    --fs-note: clamp(15px, 1.02vw, 20px);
+  }
 }

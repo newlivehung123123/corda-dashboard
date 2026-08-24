@@ -39,14 +39,14 @@ export default function CategoryGrid({ onNavigate }) {
       aria-label="Explore the index"
       style={{ background: 'var(--mango-pale)', paddingTop: 'clamp(48px, 6vw, 76px)' }}
     >
-      <div style={{ maxWidth: 1120, margin: '0 auto', padding: '0 24px 40px' }}>
+      <div style={{ maxWidth: 'var(--shell)', margin: '0 auto', padding: '0 24px 40px' }}>
         <h2 style={{ margin: '0 0 14px' }}>Explore the index</h2>
         <p
           style={{
-            fontSize: 'clamp(16px, 1.4vw, 18px)',
+            fontSize: 'var(--fs-body)',
             lineHeight: 1.62,
             color: 'var(--colour-text-muted)',
-            maxWidth: 720,
+            maxWidth: 'var(--prose)',
             margin: 0,
           }}
         >

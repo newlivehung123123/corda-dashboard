@@ -143,12 +143,12 @@ export default function ScatterView({ filters, setFilters, pinnedCountry, setPin
   return (
     <>
     <section id="scatter" style={{ padding: '48px 0', borderTop: '1px solid var(--colour-border)' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
+      <div style={{ maxWidth: 'var(--shell)', margin: '0 auto', padding: '0 24px' }}>
         <div style={{ marginBottom: 20 }}>
-          <h2 style={{ margin: 0, fontSize: 'clamp(24px, 2.4vw, 34px)', letterSpacing: '-0.016em' }}>Two-Axis Scatter Plot</h2>
+          <h2 style={{ margin: 0, fontSize: 'var(--fs-h2s)', letterSpacing: '-0.016em' }}>Two-Axis Scatter Plot</h2>
           <p style={{
             fontFamily: "'Figtree', system-ui, sans-serif",
-            fontSize: 15,
+            fontSize: 'var(--fs-note)',
             color: 'var(--colour-text-muted)',
             margin: '6px 0 0',
           }}>

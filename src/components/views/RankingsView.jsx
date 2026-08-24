@@ -72,12 +72,12 @@ export default function RankingsView({ filters, setFilters, pinnedCountry, setPi
 
   return (
     <section id="rankings" style={{ padding: '48px 0' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
+      <div style={{ maxWidth: 'var(--shell)', margin: '0 auto', padding: '0 24px' }}>
         <div style={{ marginBottom: 24 }}>
-          <h2 style={{ margin: 0, fontSize: 'clamp(24px, 2.4vw, 34px)', letterSpacing: '-0.016em' }}>Country Rankings</h2>
+          <h2 style={{ margin: 0, fontSize: 'var(--fs-h2s)', letterSpacing: '-0.016em' }}>Country Rankings</h2>
           <p style={{
             fontFamily: "'Figtree', system-ui, sans-serif",
-            fontSize: 15,
+            fontSize: 'var(--fs-note)',
             color: 'var(--colour-text-muted)',
             margin: '6px 0 0',
           }}>

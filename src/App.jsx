@@ -70,15 +70,15 @@ export default function App() {
 
       {/* ── Data & Ranking ─────────────────────────────────────────────── */}
       <section id="data-ranking" style={{ background: 'var(--colour-bg)' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(56px, 6.5vw, 88px) 24px 28px' }}>
+        <div style={{ maxWidth: 'var(--shell)', margin: '0 auto', padding: 'clamp(56px, 6.5vw, 88px) 24px 28px' }}>
           <p className="eyebrow">Explore the data</p>
-          <h2 style={{ margin: '0 0 14px', maxWidth: 820 }}>Data &amp; Ranking</h2>
+          <h2 style={{ margin: '0 0 14px', maxWidth: 'var(--measure)' }}>Data &amp; Ranking</h2>
           <p
             style={{
-              fontSize: 'clamp(16px, 1.4vw, 18px)',
+              fontSize: 'var(--fs-body)',
               lineHeight: 1.65,
               color: 'var(--colour-text-muted)',
-              maxWidth: 780,
+              maxWidth: 'var(--prose)',
               margin: 0,
             }}
           >

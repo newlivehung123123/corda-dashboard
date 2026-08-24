@@ -47,14 +47,14 @@ export default function Methodology() {
         background: 'var(--colour-bg)',
       }}
     >
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '64px 24px' }}>
+      <div style={{ maxWidth: 'var(--shell)', margin: '0 auto', padding: '64px 24px' }}>
         <h2 style={{ fontSize: 32, marginBottom: 8 }}>Methodology</h2>
         <p style={{
           fontFamily: "'Figtree', system-ui, sans-serif",
-          fontSize: 16,
+          fontSize: 'var(--fs-sub)',
           color: 'var(--colour-text-muted)',
           marginBottom: 40,
-          maxWidth: 780,
+          maxWidth: 'var(--prose)',
           lineHeight: 1.7,
         }}>
           Full documentation of the CORDA index construction, data sources, and analytical methods.
@@ -68,10 +68,10 @@ export default function Methodology() {
 
           {/* Theoretical Framework */}
           <div style={{ marginBottom: 32 }}>
-            <h4 style={{ fontSize: 16, marginBottom: 10 }}>Theoretical Framework</h4>
+            <h4 style={{ fontSize: 'var(--fs-sub)', marginBottom: 10 }}>Theoretical Framework</h4>
             <p style={{
               fontFamily: "'Figtree', system-ui, sans-serif",
-              fontSize: 15,
+              fontSize: 'var(--fs-note)',
               color: 'var(--colour-text)',
               lineHeight: 1.7,
               marginBottom: 20,
@@ -119,7 +119,7 @@ export default function Methodology() {
 
           {/* Eight-step pipeline */}
           <div style={{ marginBottom: 32 }}>
-            <h4 style={{ fontSize: 16, marginBottom: 14 }}>Eight-Step Construction Pipeline</h4>
+            <h4 style={{ fontSize: 'var(--fs-sub)', marginBottom: 14 }}>Eight-Step Construction Pipeline</h4>
             <div>
               {pipelineSteps.map(step => (
                 <Accordion
@@ -136,7 +136,7 @@ export default function Methodology() {
                     {step.bullets.map((bullet, i) => (
                       <li key={i} style={{
                         fontFamily: "'Figtree', system-ui, sans-serif",
-                        fontSize: 15,
+                        fontSize: 'var(--fs-note)',
                         color: 'var(--colour-text)',
                         lineHeight: 1.75,
                       }}>
@@ -151,7 +151,7 @@ export default function Methodology() {
 
           {/* Data sources */}
           <div style={{ marginBottom: 32 }}>
-            <h4 style={{ fontSize: 16, marginBottom: 14 }}>Data Sources</h4>
+            <h4 style={{ fontSize: 'var(--fs-sub)', marginBottom: 14 }}>Data Sources</h4>
             <div style={{ overflowX: 'auto' }}>
               <table>
                 <thead>
@@ -184,10 +184,10 @@ export default function Methodology() {
 
           {/* Regime classification note */}
           <div style={{ marginBottom: 32 }}>
-            <h4 style={{ fontSize: 16, marginBottom: 14 }}>Regime Type Classification</h4>
+            <h4 style={{ fontSize: 'var(--fs-sub)', marginBottom: 14 }}>Regime Type Classification</h4>
             <p style={{
               fontFamily: "'Figtree', system-ui, sans-serif",
-              fontSize: 15,
+              fontSize: 'var(--fs-note)',
               color: 'var(--colour-text)',
               lineHeight: 1.75,
               marginBottom: 16,
@@ -298,7 +298,7 @@ export default function Methodology() {
           </h3>
           <p style={{
             fontFamily: "'Figtree', system-ui, sans-serif",
-            fontSize: 15,
+            fontSize: 'var(--fs-note)',
             color: 'var(--colour-text-muted)',
             marginBottom: 20,
             lineHeight: 1.7,
@@ -318,7 +318,7 @@ export default function Methodology() {
                   {method.bullets.map((bullet, i) => (
                     <li key={i} style={{
                       fontFamily: "'Figtree', system-ui, sans-serif",
-                      fontSize: 15,
+                      fontSize: 'var(--fs-note)',
                       color: 'var(--colour-text)',
                       lineHeight: 1.75,
                     }}>

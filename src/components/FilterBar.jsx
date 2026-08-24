@@ -131,7 +131,7 @@ export default function FilterBar({ filters, setFilters }) {
       }}
     >
       <div style={{
-        maxWidth: 1200,
+        maxWidth: 'var(--shell)',
         margin: '0 auto',
         padding: '12px 24px',
         display: 'flex',

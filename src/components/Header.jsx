@@ -95,7 +95,7 @@ export default function Header({ onOpenSearch, onNavigate }) {
           align-items: center;
           gap: 10px;
           width: 100%;
-          max-width: 1440px;
+          max-width: var(--shell);
           height: var(--header-bar-h);
           margin: 0 auto;
           padding: 0 24px;

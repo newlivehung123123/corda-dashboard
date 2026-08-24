@@ -51,21 +51,21 @@ export default function HeroIntro() {
       id="overview"
       style={{ background: 'var(--colour-bg)', padding: 'clamp(56px, 7vw, 96px) 24px' }}
     >
-      <div style={{ maxWidth: 1120, margin: '0 auto' }}>
+      <div style={{ maxWidth: 'var(--shell)', margin: '0 auto' }}>
         <p className="eyebrow">2025 Edition</p>
 
-        <h1 style={{ maxWidth: 940, margin: '0 0 20px' }}>
+        <h1 style={{ maxWidth: 'var(--measure)', margin: '0 0 20px' }}>
           CORDA Democratic<br />AI-Readiness Index 2025
         </h1>
 
         <p
           style={{
-            fontSize: 'clamp(19px, 2vw, 26px)',
+            fontSize: 'var(--fs-lead)',
             fontWeight: 500,
             lineHeight: 1.42,
             letterSpacing: '-0.012em',
             color: 'var(--colour-text-muted)',
-            maxWidth: 760,
+            maxWidth: 'var(--prose)',
             margin: '0 0 8px',
           }}
         >
@@ -112,10 +112,10 @@ export default function HeroIntro() {
 
         <p
           style={{
-            fontSize: 'clamp(16px, 1.35vw, 18px)',
+            fontSize: 'var(--fs-body)',
             lineHeight: 1.72,
             color: 'var(--colour-text-muted)',
-            maxWidth: 860,
+            maxWidth: 'var(--prose)',
             margin: 0,
             paddingLeft: 20,
             borderLeft: '3px solid var(--mango)',

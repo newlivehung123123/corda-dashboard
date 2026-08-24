@@ -7,24 +7,24 @@ export default function RegimeClassification() {
       id="regime-classification"
       style={{ background: 'var(--mango-pale)' }}
     >
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(56px, 6.5vw, 92px) 24px' }}>
+      <div style={{ maxWidth: 'var(--shell)', margin: '0 auto', padding: 'clamp(56px, 6.5vw, 92px) 24px' }}>
         <p className="eyebrow">Taxonomy</p>
         <h2 style={{ margin: '0 0 28px' }}>Regime Type Classification</h2>
 
         <p style={{
           fontFamily: "'Figtree', system-ui, sans-serif",
-          fontSize: 15,
+          fontSize: 'var(--fs-note)',
           color: 'var(--colour-text)',
           lineHeight: 1.75,
           marginBottom: 16,
-          maxWidth: 900,
+          maxWidth: 'var(--prose)',
         }}>
           The four regime categories used in the dashboard filters follow V-Dem's{' '}
           <em>Regimes of the World</em> (RoW) taxonomy, 2024 edition (V-Dem Dataset v14), with two
           labels adapted for general audiences. The original V-Dem categories "Electoral Autocracy"
           and "Closed Autocracy" are relabelled "Hybrid" and "Authoritarian" respectively.
         </p>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 900 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 'var(--prose)' }}>
           {[
             {
               label: 'Liberal Democracy',
@@ -96,7 +96,7 @@ export default function RegimeClassification() {
         <p style={{
           fontFamily: "'Figtree', system-ui, sans-serif",
           fontSize: 12, color: 'var(--colour-text-light)',
-          marginTop: 12, lineHeight: 1.5, maxWidth: 900,
+          marginTop: 12, lineHeight: 1.5, maxWidth: 'var(--prose)',
         }}>
           Source: V-Dem Institute, Varieties of Democracy Dataset v14, Regimes of the World (RoW)
           indicator (v2x_regime), 2024 edition. Classifications are static and based on 2024 conditions.
@@ -105,7 +105,7 @@ export default function RegimeClassification() {
         </p>
 
         {/* Data limitations callout */}
-        <div className="callout" style={{ maxWidth: 900, marginTop: 32 }}>
+        <div className="callout" style={{ maxWidth: 'var(--prose)', marginTop: 32 }}>
           <strong style={{ fontFamily: "'Figtree', system-ui, sans-serif", fontSize: 13 }}>
             Data Limitations — Three items apply to this edition:
           </strong>

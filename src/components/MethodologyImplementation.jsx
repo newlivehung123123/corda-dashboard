@@ -9,13 +9,13 @@ function Block({ block }) {
       );
     case 'h3':
       return (
-        <h4 style={{ fontSize: 16, marginTop: 24, marginBottom: 10 }}>{block.text}</h4>
+        <h4 style={{ fontSize: 'var(--fs-sub)', marginTop: 24, marginBottom: 10 }}>{block.text}</h4>
       );
     case 'p':
       return (
         <p style={{
           fontFamily: "'Figtree', system-ui, sans-serif",
-          fontSize: 15,
+          fontSize: 'var(--fs-note)',
           lineHeight: 1.7,
           color: 'var(--colour-text)',
           marginBottom: 16,
@@ -40,7 +40,7 @@ function Block({ block }) {
       return (
         <p style={{
           fontFamily: "'Figtree', system-ui, sans-serif",
-          fontSize: 15,
+          fontSize: 'var(--fs-note)',
           fontStyle: 'italic',
           color: 'var(--colour-text)',
           background: 'var(--colour-bg-card)',
@@ -57,7 +57,7 @@ function Block({ block }) {
       return (
         <ul style={{
           fontFamily: "'Figtree', system-ui, sans-serif",
-          fontSize: 15,
+          fontSize: 'var(--fs-note)',
           lineHeight: 1.7,
           color: 'var(--colour-text)',
           marginBottom: 16,
@@ -146,11 +146,11 @@ export default function MethodologyImplementation() {
         background: 'var(--colour-bg)',
       }}
     >
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(56px, 6.5vw, 92px) 24px' }}>
+      <div style={{ maxWidth: 'var(--shell)', margin: '0 auto', padding: 'clamp(56px, 6.5vw, 92px) 24px' }}>
         <p className="eyebrow">How the index is built</p>
         <h2 style={{ margin: '0 0 8px' }}>Methodology &amp; Implementation</h2>
 
-        <div style={{ maxWidth: 900, marginTop: 32 }}>
+        <div style={{ maxWidth: 'var(--prose)', marginTop: 32 }}>
           {previewBlocks.map((block, i) => <Block key={i} block={block} />)}
 
           {expanded && fullBlocks.map((block, i) => <Block key={`f${i}`} block={block} />)}

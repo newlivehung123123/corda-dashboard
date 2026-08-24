@@ -93,7 +93,7 @@ export default function HeroSlideshow({ onNavigate }) {
       <div style={{ position: 'absolute', inset: 0, zIndex: 4, display: 'flex', flexDirection: 'column', pointerEvents: 'none' }}>
         <div
           style={{
-            maxWidth: 1440,
+            maxWidth: 'var(--shell)',
             width: '100%',
             margin: '0 auto',
             padding: '26px 24px',

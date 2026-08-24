@@ -49,6 +49,17 @@ h4, h5, h6 {
   letter-spacing: -0.01em;
 }
 
+/* Above 1440px every size above has already hit its ceiling, so the page
+   stopped growing while the viewport kept going and the type began to look
+   marooned in the middle of the screen. These pick the scale back up from
+   exactly where the ceilings left it, so nothing changes at or below 1440. */
+@media (min-width: 1441px) {
+  body { font-size: clamp(17px, 1vw, 22px); }
+  h1   { font-size: clamp(68px, 4.8vw, 100px); }
+  h2   { font-size: clamp(52px, 3.4vw, 74px); }
+  h3   { font-size: clamp(30px, 1.9vw, 42px); }
+}
+
 p {
   margin: 0 0 1em;
 }
@@ -81,14 +92,14 @@ a:hover {
 
 /* Layout */
 .container {
-  max-width: 1200px;
+  max-width: var(--shell);
   margin: 0 auto;
   padding: 0 24px;
 }
 
 .section {
   padding: 64px 24px;
-  max-width: 1200px;
+  max-width: var(--shell);
   margin: 0 auto;
 }
 
